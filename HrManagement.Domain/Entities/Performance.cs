@@ -13,7 +13,7 @@ public class Performance:BaseEntity
     public DateTime ReviewStartDate { get; set; }
     public DateTime ReviewEndDate { get; set; }
     
-    public Guid ReviewedUserId { get; set; }
+    public Guid? ReviewedUserId { get; set; }
     public AppUser ReviewedUser { get; set; } 
     
     public Guid EmployeeId { get; set; }

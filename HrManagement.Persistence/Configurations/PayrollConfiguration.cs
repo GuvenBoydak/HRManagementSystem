@@ -11,6 +11,7 @@ public class PayrollConfiguration:IEntityTypeConfiguration<Payroll>
         builder.HasKey(x => x.Id);
         builder.Property(x => x.BasicSalary).IsRequired().HasColumnType("decimal(18, 2)");
         builder.Property(x => x.Allowances).IsRequired().HasColumnType("decimal(18, 2)");
+        builder.Property(x => x.Overtime).HasColumnType("decimal(18, 2)");
         builder.Property(x => x.Deductions).IsRequired().HasColumnType("decimal(18, 2)");
         builder.Property(x => x.Tax).IsRequired().HasColumnType("decimal(18, 2)");
         builder.Property(x => x.GrossSalary).IsRequired().HasColumnType("decimal(18, 2)");

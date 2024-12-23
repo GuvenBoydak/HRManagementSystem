@@ -14,11 +14,11 @@ public class DesignTimeDbContextFactory: IDesignTimeDbContextFactory<AppDbContex
         var optionsBuilder = new DbContextOptionsBuilder();
         
         ConfigurationManager configurationManager = new();
-        configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../../Presentation/HrManagement.Api"));
+        configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../HrManagement.Api"));
         configurationManager.AddJsonFile("appsettings.json");
         
-        var connectionString = configurationManager.GetConnectionString(ConnectionStringOption.Key);
-        optionsBuilder.UseSqlServer(connectionString);
+        var connectionString = configurationManager.GetSection(ConnectionStringOption.Key).Get<ConnectionStringOption>();
+        optionsBuilder.UseSqlServer(connectionString!.SqlServer);
         return new AppDbContext(optionsBuilder.Options);
     }
 }
