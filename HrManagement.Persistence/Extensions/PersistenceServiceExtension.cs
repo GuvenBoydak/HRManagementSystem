@@ -1,6 +1,9 @@
+using HrManagement.Application.Interfaces;
+using HrManagement.Application.Interfaces.Repositories;
 using HrManagement.Domain.Shared;
 using HrManagement.Persistence.Contexts;
 using HrManagement.Persistence.Interceptors;
+using HrManagement.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +23,13 @@ public static class PersistenceServiceExtension
             });
             options.AddInterceptors(new EntityDbContextInterceptor());
         });
+
+        services.AddScoped<IUnitOfWork,UnitOfWork.UnitOfWork>();
+        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+        services.AddScoped<IPayrollRepository,PayrollRepository>();
+        services.AddScoped<IPerformanceRepository, PerformanceRepository>();
+        services.AddScoped<ILeaveFormRepository, LeaveFormRepository>();
+        
         return services;
     }
 }

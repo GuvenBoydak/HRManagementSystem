@@ -1,8 +1,8 @@
 using System.Reflection;
 
-namespace HrManagement.Persistence;
+namespace HrManagement.Application;
 
-public static class PersistenceAssembly
+public static class ApplicationAssembly
 {
     public static readonly Assembly Assembly = typeof(Assembly).Assembly; 
 }

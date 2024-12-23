@@ -1,3 +1,4 @@
+using HrManagement.Domain.Entities.Identity;
 using HrManagement.Domain.Enums;
 
 namespace HrManagement.Domain.Entities;
@@ -17,9 +18,6 @@ public class Employee:BaseEntity
     public DateTime HireDate { get; set; } 
     public decimal PerformanceScore { get; set; } 
     public int LeaveUsed { get; set; } 
-
-    public Guid? ManagerId { get; set; }
-    public Employee Manager { get; set; }
     
     public ICollection<LeaveForm> LeaveForms { get; set; }
     public ICollection<Performance> Performances { get; set; }

@@ -19,11 +19,7 @@ public class EmployeeConfiguration:IEntityTypeConfiguration<Employee>
         builder.Property(x => x.Position).IsRequired().HasMaxLength(80);
         builder.Property(x => x.Department).IsRequired().HasMaxLength(80);
         builder.Property(x => x.Salary).IsRequired().HasColumnType("decimal(18, 2)");
+        builder.Property(x => x.PerformanceScore).HasColumnType("decimal(18, 2)");
         builder.Property(x => x.HireDate).IsRequired();
-        
-        builder.HasOne(e => e.Manager)  
-            .WithMany()  
-            .HasForeignKey(e => e.ManagerId)
-            .OnDelete(DeleteBehavior.Restrict); 
     }
 }
