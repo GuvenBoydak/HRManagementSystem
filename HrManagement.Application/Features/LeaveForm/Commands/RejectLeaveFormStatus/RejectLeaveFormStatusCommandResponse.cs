@@ -1,0 +1,3 @@
+namespace HrManagement.Application.Features.LeaveForm.Commands.RejectLeaveFormStatus;
+
+public record RejectLeaveFormStatusCommandResponse(ServiceResult Result);

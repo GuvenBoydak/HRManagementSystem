@@ -7,5 +7,4 @@ public record UpdateLeaveFormCommandRequest(Guid Id,
     DateTime EndDate,
     int TotalDays,
     LeaveStatus Status,
-    string Reason,
-    Guid EmployeeId):ICommand<UpdateLeaveFormCommandResponse>;
+    string Reason):ICommand<UpdateLeaveFormCommandResponse>;

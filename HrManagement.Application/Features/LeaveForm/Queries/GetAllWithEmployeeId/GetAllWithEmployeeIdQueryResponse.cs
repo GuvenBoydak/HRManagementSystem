@@ -1,3 +1,3 @@
 namespace HrManagement.Application.Features.LeaveForm.Queries.GetAllWithEmployeeId;
 
-public record GetAllWithEmployeeIdQueryResponse(ServiceResult<List<GetAllWithEmployeeIdDto>> Response);
+public record GetAllWithEmployeeIdQueryResponse(ServiceResult<List<GetAllWithEmployeeIdDto>> Result);
