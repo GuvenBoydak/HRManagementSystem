@@ -12,6 +12,8 @@ public static class ApplicationServiceExtension
         services.AddAutoMapper(typeof(ApplicationAssembly).Assembly);
         
         services.AddScoped<IEmployeeService,EmployeeService>();
+        services.AddScoped<ILeaveFormService,LeaveFormService>();
+        
         return services;
     }
 }

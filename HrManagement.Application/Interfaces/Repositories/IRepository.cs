@@ -7,6 +7,7 @@ public interface IRepository<T> where T : BaseEntity
 {
     public Task<List<T>> GetAllAsync(bool isTracking = true);
     public Task<T?> GetByIdAsync(Guid id,bool isTracking = true);
+    public Task<List<T>> GetAsync(Expression<Func<T, bool>> predicate, bool isTracking = true);
     public Task<T?> GetFirstAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken,
         bool isTracking = true);
     ValueTask AddAsync(T entity,CancellationToken cancellationToken);
