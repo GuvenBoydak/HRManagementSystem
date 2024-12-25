@@ -14,14 +14,12 @@ public class PayrollConfiguration : IEntityTypeConfiguration<Payroll>
         builder.Property(x => x.Overtime).HasColumnType("decimal(18, 2)");
         builder.Property(x => x.Deductions).IsRequired().HasColumnType("decimal(18, 2)");
         builder.Property(x => x.Tax).IsRequired().HasColumnType("decimal(18, 2)");
-        builder.Property(x => x.GrossSalary).IsRequired().HasColumnType("decimal(18, 2)");
-        builder.Property(x => x.NetSalary).IsRequired().HasColumnType("decimal(18, 2)");
         builder.Property(x => x.PaymentDate).IsRequired();
-        builder.Property(x => x.PayPeriodStartDate).IsRequired();
-        builder.Property(x => x.PayPeriodEndDate).IsRequired();
         builder.Property(x => x.BankAccountNumber).IsRequired();
         builder.Property(x => x.RetirementFund).IsRequired().HasColumnType("decimal(18, 2)");
-
+        builder.Ignore(p => p.GrossSalary)
+            .Ignore(p => p.NetSalary);
+        
         builder.HasOne(x => x.Employee)
             .WithMany(e => e.Payrolls)
             .HasForeignKey(x => x.EmployeeId)
