@@ -3,10 +3,12 @@ using HrManagement.Application.Interfaces.Services;
 
 namespace HrManagement.Application.Features.Employee.Queries.GetAllEmployee;
 
-public class GetAllEmployeeQueryHandler(IEmployeeService employeeService):IQueryHandler<GetAllEmployeeQueryRequest,GetAllEmployeeQueryResponse>
+public class GetAllEmployeeQueryHandler(IEmployeeService employeeService)
+    : IQueryHandler<GetAllEmployeeQueryRequest, GetAllEmployeeQueryResponse>
 {
-    public async Task<GetAllEmployeeQueryResponse> Handle(GetAllEmployeeQueryRequest request, CancellationToken cancellationToken)
+    public async Task<GetAllEmployeeQueryResponse> Handle(GetAllEmployeeQueryRequest request,
+        CancellationToken cancellationToken)
     {
-        return new (await employeeService.GetAllAsync());
+        return new(await employeeService.GetAllAsync());
     }
 }

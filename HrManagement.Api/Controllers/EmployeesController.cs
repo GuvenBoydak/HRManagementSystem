@@ -8,11 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HrManagement.Api.Controllers;
 
-public class EmployeesController(IMediator mediator):BaseController
+public class EmployeesController(IMediator mediator) : BaseController
 {
     [HttpGet]
     public async Task<IActionResult> GetEmployees()
-    { 
+    {
         var response = await mediator.Send(new GetAllEmployeeQueryRequest());
         return CreateActionResult(response.Response);
     }

@@ -8,12 +8,13 @@ public static class ApplicationServiceExtension
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        services.AddMediatR(cfg=> cfg.RegisterServicesFromAssembly(typeof(ApplicationAssembly).Assembly));
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ApplicationAssembly).Assembly));
         services.AddAutoMapper(typeof(ApplicationAssembly).Assembly);
-        
-        services.AddScoped<IEmployeeService,EmployeeService>();
-        services.AddScoped<ILeaveFormService,LeaveFormService>();
-        
+
+        services.AddScoped<IEmployeeService, EmployeeService>();
+        services.AddScoped<ILeaveFormService, LeaveFormService>();
+        services.AddScoped<IPerformanceService, PerformanceService>();
+
         return services;
     }
 }

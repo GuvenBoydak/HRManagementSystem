@@ -7,13 +7,13 @@ using HrManagement.Domain.Entities;
 
 namespace HrManagement.Application.Mapping;
 
-public class EmployeeMappingProfile:Profile
+public class EmployeeMappingProfile : Profile
 {
     public EmployeeMappingProfile()
     {
         CreateMap<Employee, CreateEmployeeCommandRequest>().ReverseMap();
         CreateMap<Employee, UpdateEmployeeCommandRequest>().ReverseMap();
-        CreateMap<Employee,GetAllEmployeeDto>().ReverseMap();
+        CreateMap<Employee, GetAllEmployeeDto>().ReverseMap();
         CreateMap<Employee, GetEmployeeByIdDto>().ReverseMap();
     }
 }

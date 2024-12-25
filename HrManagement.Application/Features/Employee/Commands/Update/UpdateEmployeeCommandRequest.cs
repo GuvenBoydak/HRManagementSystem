@@ -2,7 +2,8 @@ using HrManagement.Domain.Enums;
 
 namespace HrManagement.Application.Features.Employee.Commands.Update;
 
-public record UpdateEmployeeCommandRequest(Guid Id,
+public record UpdateEmployeeCommandRequest(
+    Guid Id,
     string Name,
     string Surname,
     string Email,
@@ -16,4 +17,4 @@ public record UpdateEmployeeCommandRequest(Guid Id,
     DateTime HireDate,
     decimal PerformanceScore,
     int LeaveUsed,
-    Guid ManagerId):ICommand<UpdateEmployeeCommandResponse>;
+    Guid ManagerId) : ICommand<UpdateEmployeeCommandResponse>;

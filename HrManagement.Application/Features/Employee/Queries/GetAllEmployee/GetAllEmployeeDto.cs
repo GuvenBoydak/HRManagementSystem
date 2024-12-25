@@ -2,7 +2,8 @@ using HrManagement.Domain.Enums;
 
 namespace HrManagement.Application.Features.Employee.Queries.GetAllEmployee;
 
-public record GetAllEmployeeDto(string Name,
+public record GetAllEmployeeDto(
+    string Name,
     string Surname,
     string Email,
     string Phone,

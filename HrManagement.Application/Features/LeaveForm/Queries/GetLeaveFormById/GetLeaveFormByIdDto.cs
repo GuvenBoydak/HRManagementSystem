@@ -2,7 +2,8 @@ using HrManagement.Domain.Enums;
 
 namespace HrManagement.Application.Features.LeaveForm.Queries.GetLeaveFormById;
 
-public record GetLeaveFormByIdDto(Guid Id,
+public record GetLeaveFormByIdDto(
+    Guid Id,
     DateTime StartDate,
     DateTime EndDate,
     int TotalDays,

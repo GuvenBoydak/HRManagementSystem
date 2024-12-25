@@ -6,7 +6,7 @@ namespace HrManagement.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class BaseController:ControllerBase
+public class BaseController : ControllerBase
 {
     [NonAction]
     public IActionResult CreateActionResult<T>(ServiceResult<T> result)
@@ -18,13 +18,15 @@ public class BaseController:ControllerBase
             _ => new ObjectResult(result) { StatusCode = result.StatusCode.GetHashCode() }
         };
     }
+
     [NonAction]
     public IActionResult CreateActionResult(ServiceResult result)
     {
         if (result.StatusCode == HttpStatusCode.NoContent)
         {
-            return new ObjectResult(null){StatusCode = result.StatusCode.GetHashCode()};
+            return new ObjectResult(null) { StatusCode = result.StatusCode.GetHashCode() };
         }
-        return new ObjectResult(result){StatusCode = result.StatusCode.GetHashCode()};
+
+        return new ObjectResult(result) { StatusCode = result.StatusCode.GetHashCode() };
     }
 }

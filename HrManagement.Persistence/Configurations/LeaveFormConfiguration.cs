@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HrManagement.Persistence.Configurations;
 
-public class LeaveFormConfiguration:IEntityTypeConfiguration<LeaveForm>
+public class LeaveFormConfiguration : IEntityTypeConfiguration<LeaveForm>
 {
     public void Configure(EntityTypeBuilder<LeaveForm> builder)
     {
@@ -12,15 +12,15 @@ public class LeaveFormConfiguration:IEntityTypeConfiguration<LeaveForm>
         builder.Property(x => x.StartDate).IsRequired();
         builder.Property(x => x.EndDate).IsRequired();
         builder.Property(x => x.TotalDays).IsRequired();
-        
-        builder.HasOne(x=> x.Employee)
-            .WithMany(e=> e.LeaveForms)
-            .HasForeignKey(x=>x.EmployeeId)
+
+        builder.HasOne(x => x.Employee)
+            .WithMany(e => e.LeaveForms)
+            .HasForeignKey(x => x.EmployeeId)
             .OnDelete(DeleteBehavior.Restrict);
-        
-        builder.HasOne(x => x.ApprovedUser)  
-            .WithMany()  
+
+        builder.HasOne(x => x.ApprovedUser)
+            .WithMany()
             .HasForeignKey(e => e.ApprovedUserId)
-            .OnDelete(DeleteBehavior.Restrict); 
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

@@ -24,7 +24,7 @@ public class LeaveFormService(ILeaveFormRepository leaveFormRepository, IUnitOfW
 
         var leaveFormsDto = mapper.Map<List<GetAllWithEmployeeIdDto>>(leaveForms);
 
-        return ServiceResult<List<GetAllWithEmployeeIdDto>>.Succes(leaveFormsDto);
+        return ServiceResult<List<GetAllWithEmployeeIdDto>>.Success(leaveFormsDto);
     }
 
     public async Task<ServiceResult<GetLeaveFormByIdDto>> GetByIdAsync(Guid id)
@@ -37,7 +37,7 @@ public class LeaveFormService(ILeaveFormRepository leaveFormRepository, IUnitOfW
 
         var leaveFormDto = mapper.Map<GetLeaveFormByIdDto>(leaveForm);
 
-        return ServiceResult<GetLeaveFormByIdDto>.Succes(leaveFormDto);
+        return ServiceResult<GetLeaveFormByIdDto>.Success(leaveFormDto);
     }
 
     public async Task<ServiceResult<Guid>> AddAsync(CreateLeaveFormCommandRequest request,
@@ -48,7 +48,7 @@ public class LeaveFormService(ILeaveFormRepository leaveFormRepository, IUnitOfW
         await leaveFormRepository.AddAsync(leaveForm, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return ServiceResult<Guid>.SuccesAsCreated(leaveForm.Id, $"api/LeaveForm/{leaveForm.Id}");
+        return ServiceResult<Guid>.SuccessAsCreated(leaveForm.Id, $"api/LeaveForm/{leaveForm.Id}");
     }
 
     public async Task<ServiceResult> UpdateAsync(UpdateLeaveFormCommandRequest request)
@@ -64,7 +64,7 @@ public class LeaveFormService(ILeaveFormRepository leaveFormRepository, IUnitOfW
         leaveFormRepository.Update(updatedLeaveForm);
         await unitOfWork.SaveChangesAsync();
 
-        return ServiceResult.Succes(HttpStatusCode.NoContent);
+        return ServiceResult.Success(HttpStatusCode.NoContent);
     }
 
     public async Task<ServiceResult> ApproveLeaveFormStatus(ApproveLeaveFromStatusCommandRequest request)
@@ -96,6 +96,6 @@ public class LeaveFormService(ILeaveFormRepository leaveFormRepository, IUnitOfW
         leaveFormRepository.Update(leaveForm);
         await unitOfWork.SaveChangesAsync();
 
-        return ServiceResult.Succes(HttpStatusCode.NoContent);
+        return ServiceResult.Success(HttpStatusCode.NoContent);
     }
 }

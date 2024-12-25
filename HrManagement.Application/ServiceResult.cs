@@ -7,15 +7,14 @@ public class ServiceResult<T>
 {
     public T? Data { get; set; }
     public List<string>? ErrorMessages { get; set; }
-    [JsonIgnore]
-    public HttpStatusCode StatusCode { get; set; }
-  
+    [JsonIgnore] public HttpStatusCode StatusCode { get; set; }
+
     [JsonIgnore] public bool IsSuccess => ErrorMessages == null || ErrorMessages?.Count == 0;
 
     [JsonIgnore] public bool IsFailure => !IsSuccess;
     [JsonIgnore] public string? UrlAsCreated { get; set; }
-    
-    public static ServiceResult<T> Succes(T data,HttpStatusCode statusCode = HttpStatusCode.OK)
+
+    public static ServiceResult<T> Success(T data, HttpStatusCode statusCode = HttpStatusCode.OK)
     {
         return new ServiceResult<T>()
         {
@@ -24,7 +23,7 @@ public class ServiceResult<T>
         };
     }
 
-    public static ServiceResult<T> SuccesAsCreated(T data, string urlAsCreated)
+    public static ServiceResult<T> SuccessAsCreated(T data, string urlAsCreated)
     {
         return new ServiceResult<T>()
         {
@@ -42,8 +41,8 @@ public class ServiceResult<T>
             StatusCode = statusCode
         };
     }
-    
-    public static ServiceResult<T> Failure(List<string> messages,HttpStatusCode statusCode = HttpStatusCode.BadRequest)
+
+    public static ServiceResult<T> Failure(List<string> messages, HttpStatusCode statusCode = HttpStatusCode.BadRequest)
     {
         return new ServiceResult<T>()
         {
@@ -57,11 +56,11 @@ public class ServiceResult
 {
     public List<string>? ErrorMessages { get; set; }
 
-   [JsonIgnore] public HttpStatusCode StatusCode { get; set; }
-   [JsonIgnore] public bool IsSuccess => ErrorMessages == null || ErrorMessages?.Count > 0;
-   [JsonIgnore] public bool IsFailure => !IsSuccess;
-    
-    public static ServiceResult Succes(HttpStatusCode statusCode = HttpStatusCode.OK)
+    [JsonIgnore] public HttpStatusCode StatusCode { get; set; }
+    [JsonIgnore] public bool IsSuccess => ErrorMessages == null || ErrorMessages?.Count > 0;
+    [JsonIgnore] public bool IsFailure => !IsSuccess;
+
+    public static ServiceResult Success(HttpStatusCode statusCode = HttpStatusCode.OK)
     {
         return new ServiceResult()
         {
@@ -77,8 +76,8 @@ public class ServiceResult
             StatusCode = statusCode
         };
     }
-    
-    public static ServiceResult Failure(List<string> messages,HttpStatusCode statusCode = HttpStatusCode.BadRequest)
+
+    public static ServiceResult Failure(List<string> messages, HttpStatusCode statusCode = HttpStatusCode.BadRequest)
     {
         return new ServiceResult()
         {

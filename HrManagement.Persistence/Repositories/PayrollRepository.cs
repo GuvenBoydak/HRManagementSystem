@@ -4,7 +4,6 @@ using HrManagement.Persistence.Contexts;
 
 namespace HrManagement.Persistence.Repositories;
 
-public class PayrollRepository(AppDbContext context):GenericRepository<Payroll>(context), IPayrollRepository
+public class PayrollRepository(AppDbContext context) : GenericRepository<Payroll>(context), IPayrollRepository
 {
-    
 }

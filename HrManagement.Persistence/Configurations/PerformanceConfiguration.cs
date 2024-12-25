@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HrManagement.Persistence.Configurations;
 
-public class PerformanceConfiguration:IEntityTypeConfiguration<Performance>
+public class PerformanceConfiguration : IEntityTypeConfiguration<Performance>
 {
     public void Configure(EntityTypeBuilder<Performance> builder)
     {
@@ -16,15 +16,15 @@ public class PerformanceConfiguration:IEntityTypeConfiguration<Performance>
         builder.Property(x => x.OverallScore).IsRequired();
         builder.Property(x => x.ReviewStartDate).IsRequired();
         builder.Property(x => x.ReviewEndDate).IsRequired();
-        
-        builder.HasOne(x=> x.Employee)
-            .WithMany(e=> e.Performances)
-            .HasForeignKey(x=>x.EmployeeId)
+
+        builder.HasOne(x => x.Employee)
+            .WithMany(e => e.Performances)
+            .HasForeignKey(x => x.EmployeeId)
             .OnDelete(DeleteBehavior.Restrict);
-        
-        builder.HasOne(x => x.ReviewedUser)  
-            .WithMany()  
+
+        builder.HasOne(x => x.ReviewedUser)
+            .WithMany()
             .HasForeignKey(e => e.ReviewedUserId)
-            .OnDelete(DeleteBehavior.Restrict); 
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

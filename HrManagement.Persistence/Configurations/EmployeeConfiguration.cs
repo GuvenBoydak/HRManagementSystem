@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HrManagement.Persistence.Configurations;
 
-public class EmployeeConfiguration:IEntityTypeConfiguration<Employee>
+public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
 {
     public void Configure(EntityTypeBuilder<Employee> builder)
     {

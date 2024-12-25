@@ -13,35 +13,38 @@ using HrManagement.Domain.Entities;
 
 namespace HrManagement.Application.Services;
 
-public class EmployeeService(IEmployeeRepository employeeRepository,IUnitOfWork unitOfWork,IMapper mapper):IEmployeeService
+public class EmployeeService(IEmployeeRepository employeeRepository, IUnitOfWork unitOfWork, IMapper mapper)
+    : IEmployeeService
 {
     public async Task<ServiceResult<List<GetAllEmployeeDto>>> GetAllAsync()
     {
         var employeeResponse = mapper.Map<List<GetAllEmployeeDto>>(await employeeRepository.GetAllAsync());
-        
-        return ServiceResult<List<GetAllEmployeeDto>>.Succes(employeeResponse);
+
+        return ServiceResult<List<GetAllEmployeeDto>>.Success(employeeResponse);
     }
 
     public async Task<ServiceResult<GetEmployeeByIdDto>> GetByIdAsync(Guid id)
     {
-       var employee = await employeeRepository.GetByIdAsync(id);
-       if (employee is null)
-       {
-           return ServiceResult<GetEmployeeByIdDto>.Failure(EmployeeConstant.NotFound);
-       }
-       var employeeResponse = mapper.Map<GetEmployeeByIdDto>(employee);
-       
-       return ServiceResult<GetEmployeeByIdDto>.Succes(employeeResponse);
+        var employee = await employeeRepository.GetByIdAsync(id);
+        if (employee is null)
+        {
+            return ServiceResult<GetEmployeeByIdDto>.Failure(EmployeeConstant.NotFound);
+        }
+
+        var employeeResponse = mapper.Map<GetEmployeeByIdDto>(employee);
+
+        return ServiceResult<GetEmployeeByIdDto>.Success(employeeResponse);
     }
 
-    public async Task<ServiceResult<Guid>> AddAsync(CreateEmployeeCommandRequest commandRequest,CancellationToken cancellationToken)
+    public async Task<ServiceResult<Guid>> AddAsync(CreateEmployeeCommandRequest commandRequest,
+        CancellationToken cancellationToken)
     {
         var employee = mapper.Map<Employee>(commandRequest);
-        
-        await employeeRepository.AddAsync(employee,cancellationToken);
+
+        await employeeRepository.AddAsync(employee, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
-        
-        return ServiceResult<Guid>.SuccesAsCreated(employee.Id,$"api/employees/{employee.Id}");
+
+        return ServiceResult<Guid>.SuccessAsCreated(employee.Id, $"api/employees/{employee.Id}");
     }
 
     public async Task<ServiceResult> UpdateAsync(UpdateEmployeeCommandRequest request)
@@ -51,25 +54,26 @@ public class EmployeeService(IEmployeeRepository employeeRepository,IUnitOfWork 
         {
             return ServiceResult.Failure(EmployeeConstant.NotFound);
         }
-        
+
         var employee = mapper.Map(request, updatedEmployee);
-        
+
         employeeRepository.Update(employee);
         await unitOfWork.SaveChangesAsync();
-        
-        return ServiceResult.Succes(HttpStatusCode.NoContent);
+
+        return ServiceResult.Success(HttpStatusCode.NoContent);
     }
 
     public async Task<ServiceResult> DeleteAsync(DeleteEmployeeCommandRequest request)
     {
-       var employee =  await employeeRepository.GetByIdAsync(request.Id);
-       if (employee is null)
-       {
-           return ServiceResult.Failure(EmployeeConstant.NotFound);
-       }
-       employeeRepository.Remove(employee);
-       await unitOfWork.SaveChangesAsync();
+        var employee = await employeeRepository.GetByIdAsync(request.Id);
+        if (employee is null)
+        {
+            return ServiceResult.Failure(EmployeeConstant.NotFound);
+        }
 
-       return ServiceResult.Succes(HttpStatusCode.NoContent);
+        employeeRepository.Remove(employee);
+        await unitOfWork.SaveChangesAsync();
+
+        return ServiceResult.Success(HttpStatusCode.NoContent);
     }
 }

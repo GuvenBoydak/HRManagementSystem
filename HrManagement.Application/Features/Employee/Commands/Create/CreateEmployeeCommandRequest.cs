@@ -14,4 +14,4 @@ public record CreateEmployeeCommandRequest(
     string Department,
     decimal Salary,
     DateTime HireDate,
-    Guid ManagerId):ICommand<CreateEmployeeCommandResponse>;
+    Guid ManagerId) : ICommand<CreateEmployeeCommandResponse>;

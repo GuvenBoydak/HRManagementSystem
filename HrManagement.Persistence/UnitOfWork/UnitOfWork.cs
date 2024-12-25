@@ -3,7 +3,7 @@ using HrManagement.Persistence.Contexts;
 
 namespace HrManagement.Persistence.UnitOfWork;
 
-public class UnitOfWork(AppDbContext context):IUnitOfWork
+public class UnitOfWork(AppDbContext context) : IUnitOfWork
 {
     public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
