@@ -1,0 +1,3 @@
+namespace HrManagement.Application.Features.Payroll.Queries.GetPayrollsWithEmployeeId;
+
+public record GetPayrollsWithEmployeeIdQueryResponse(ServiceResult<List<GetPayrollsWithEmployeeIdDto>> Result);

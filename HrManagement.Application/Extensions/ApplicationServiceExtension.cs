@@ -14,7 +14,8 @@ public static class ApplicationServiceExtension
         services.AddScoped<IEmployeeService, EmployeeService>();
         services.AddScoped<ILeaveFormService, LeaveFormService>();
         services.AddScoped<IPerformanceService, PerformanceService>();
-
+        services.AddScoped<IPayrollService, PayrollService>();
+        
         return services;
     }
 }

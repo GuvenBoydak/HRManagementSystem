@@ -13,9 +13,9 @@ public class PerformanceConfiguration : IEntityTypeConfiguration<Performance>
         builder.Property(x => x.TeamworkScore).IsRequired();
         builder.Property(x => x.LeadershipScore).IsRequired();
         builder.Property(x => x.CommunicationScore).IsRequired();
-        builder.Property(x => x.OverallScore).IsRequired();
         builder.Property(x => x.ReviewStartDate).IsRequired();
         builder.Property(x => x.ReviewEndDate).IsRequired();
+        builder.Ignore(p => p.OverallScore);
 
         builder.HasOne(x => x.Employee)
             .WithMany(e => e.Performances)
