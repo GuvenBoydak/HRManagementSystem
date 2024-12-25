@@ -1,3 +1,3 @@
 namespace HrManagement.Application.Features.Employee.Queries.GetEmployeeById;
 
-public record GetEmployeeByIdQueryRequest(Guid Id):IQuery<GetEmployeeByIdQueryResponse>;
+public record GetEmployeeByIdQueryRequest(Guid Id) : IQuery<GetEmployeeByIdQueryResponse>;

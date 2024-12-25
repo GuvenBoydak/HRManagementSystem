@@ -3,7 +3,7 @@ using HrManagement.Domain.Enums;
 
 namespace HrManagement.Domain.Entities;
 
-public class Employee:BaseEntity
+public class Employee : BaseEntity
 {
     public string Name { get; set; }
     public string Surname { get; set; }
@@ -15,10 +15,10 @@ public class Employee:BaseEntity
     public string Position { get; set; }
     public string Department { get; set; }
     public decimal Salary { get; set; }
-    public DateTime HireDate { get; set; } 
-    public decimal PerformanceScore { get; set; } 
-    public int LeaveUsed { get; set; } 
-    
+    public DateTime HireDate { get; set; }
+    public decimal PerformanceScore { get; set; }
+    public int LeaveUsed { get; set; }
+
     public ICollection<LeaveForm> LeaveForms { get; set; }
     public ICollection<Performance> Performances { get; set; }
     public ICollection<Payroll> Payrolls { get; set; }

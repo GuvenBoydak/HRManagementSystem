@@ -2,7 +2,8 @@ using HrManagement.Domain.Enums;
 
 namespace HrManagement.Application.Features.LeaveForm.Queries.GetAllWithEmployeeId;
 
-public record GetAllWithEmployeeIdDto(Guid Id,
+public record GetAllWithEmployeeIdDto(
+    Guid Id,
     DateTime StartDate,
     DateTime EndDate,
     int TotalDays,

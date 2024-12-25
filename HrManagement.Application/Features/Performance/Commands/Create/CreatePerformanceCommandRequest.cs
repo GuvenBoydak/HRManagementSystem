@@ -1,6 +1,7 @@
 namespace HrManagement.Application.Features.Performance.Commands.Create;
 
-public record CreatePerformanceCommandRequest(string FeedBack,
+public record CreatePerformanceCommandRequest(
+    string FeedBack,
     int WorkPerformanceScore,
     int TeamworkScore,
     int CommunicationScore,
@@ -8,4 +9,4 @@ public record CreatePerformanceCommandRequest(string FeedBack,
     DateTime ReviewStartDate,
     DateTime ReviewEndDate,
     Guid ReviewedUserId,
-    Guid EmployeeId):ICommand<CreatePerformanceCommandResponse>;
+    Guid EmployeeId) : ICommand<CreatePerformanceCommandResponse>;

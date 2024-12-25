@@ -10,7 +10,10 @@ public interface IEmployeeService
 {
     Task<ServiceResult<List<GetAllEmployeeDto>>> GetAllAsync();
     Task<ServiceResult<GetEmployeeByIdDto>> GetByIdAsync(Guid id);
-    Task<ServiceResult<Guid>> AddAsync(CreateEmployeeCommandRequest commandRequest,CancellationToken cancellationToken);
+
+    Task<ServiceResult<Guid>> AddAsync(CreateEmployeeCommandRequest commandRequest,
+        CancellationToken cancellationToken);
+
     Task<ServiceResult> UpdateAsync(UpdateEmployeeCommandRequest request);
     Task<ServiceResult> DeleteAsync(DeleteEmployeeCommandRequest request);
 }

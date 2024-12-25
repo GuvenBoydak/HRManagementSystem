@@ -1,6 +1,7 @@
 namespace HrManagement.Application.Features.Performance.Queries.GetPerformanceById;
 
-public record GetPerformanceByIdDto(Guid Id,
+public record GetPerformanceByIdDto(
+    Guid Id,
     string FeedBack,
     int WorkPerformanceScore,
     int TeamworkScore,

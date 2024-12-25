@@ -38,6 +38,7 @@ public class PerformancesController(IMediator mediator) : BaseController
         var response = await mediator.Send(request);
         return CreateActionResult(response.Result);
     }
+
     [HttpDelete]
     public async Task<IActionResult> Delete([FromBody] DeletePerformanceCommandRequest request)
     {

@@ -8,6 +8,7 @@ public abstract class BaseEntity
         CreatedDate = DateTime.UtcNow;
         IsDeleted = false;
     }
+
     public Guid Id { get; set; }
     public DateTime CreatedDate { get; set; }
     public DateTime? UpdatedDate { get; set; }

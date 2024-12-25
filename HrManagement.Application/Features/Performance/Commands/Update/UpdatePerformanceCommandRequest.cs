@@ -1,6 +1,7 @@
 namespace HrManagement.Application.Features.Performance.Commands.Update;
 
-public record UpdatePerformanceCommandRequest(Guid Id,
+public record UpdatePerformanceCommandRequest(
+    Guid Id,
     string FeedBack,
     int WorkPerformanceScore,
     int TeamworkScore,
@@ -8,4 +9,4 @@ public record UpdatePerformanceCommandRequest(Guid Id,
     int LeadershipScore,
     DateTime ReviewStartDate,
     DateTime ReviewEndDate,
-    Guid ReviewedUserId):ICommand<UpdatePerformanceCommandResponse>;
+    Guid ReviewedUserId) : ICommand<UpdatePerformanceCommandResponse>;

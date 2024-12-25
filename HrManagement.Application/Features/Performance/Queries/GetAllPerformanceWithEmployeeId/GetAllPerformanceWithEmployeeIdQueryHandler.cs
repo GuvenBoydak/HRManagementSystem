@@ -5,7 +5,8 @@ namespace HrManagement.Application.Features.Performance.Queries.GetAllPerformanc
 public class GetAllPerformanceWithEmployeeIdQueryHandler(IPerformanceService performanceService)
     : IQueryHandler<GetAllPerformanceWithEmployeeIdQueryRequest, GetAllPerformanceWithEmployeeIdQueryResponse>
 {
-    public async Task<GetAllPerformanceWithEmployeeIdQueryResponse> Handle(GetAllPerformanceWithEmployeeIdQueryRequest request, CancellationToken cancellationToken)
+    public async Task<GetAllPerformanceWithEmployeeIdQueryResponse> Handle(
+        GetAllPerformanceWithEmployeeIdQueryRequest request, CancellationToken cancellationToken)
     {
         return new(await performanceService.GetAllPerformanceWithEmployeeIdAsync(request.EmployeeId));
     }

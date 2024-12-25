@@ -7,13 +7,13 @@ using HrManagement.Domain.Entities;
 
 namespace HrManagement.Application.Mapping;
 
-public class PerformanceMappingProfile: Profile
+public class PerformanceMappingProfile : Profile
 {
     public PerformanceMappingProfile()
     {
         CreateMap<Performance, GetAllPerformanceWithEmployeeIdDto>().ReverseMap();
         CreateMap<Performance, GetPerformanceByIdDto>().ReverseMap();
-        CreateMap<CreatePerformanceCommandRequest,Performance>().ReverseMap();
-        CreateMap<UpdatePerformanceCommandRequest,Performance>().ReverseMap();
+        CreateMap<CreatePerformanceCommandRequest, Performance>().ReverseMap();
+        CreateMap<UpdatePerformanceCommandRequest, Performance>().ReverseMap();
     }
 }

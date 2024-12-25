@@ -4,7 +4,7 @@ using HrManagement.Persistence.Contexts;
 
 namespace HrManagement.Persistence.Repositories;
 
-public class PerformanceRepository(AppDbContext context):GenericRepository<Performance>(context), IPerformanceRepository
+public class PerformanceRepository(AppDbContext context)
+    : GenericRepository<Performance>(context), IPerformanceRepository
 {
-    
 }

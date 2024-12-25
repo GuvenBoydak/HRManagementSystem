@@ -7,7 +7,7 @@ using HrManagement.Domain.Entities;
 
 namespace HrManagement.Application.Mapping;
 
-public class LeaveFormMappingProfile:Profile
+public class LeaveFormMappingProfile : Profile
 {
     public LeaveFormMappingProfile()
     {
