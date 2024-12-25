@@ -1,0 +1,3 @@
+namespace HrManagement.Application.Features.Performance.Queries.GetPerformanceById;
+
+public record GetPerformanceByIdQueryResponse(ServiceResult<GetPerformanceByIdDto> Result);
