@@ -3,10 +3,12 @@ using HrManagement.Application.Features.Payroll.Commands.Update;
 using HrManagement.Application.Features.Payroll.Queries.GetPayrollById;
 using HrManagement.Application.Features.Payroll.Queries.GetPayrollsWithEmployeeId;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HrManagement.Api.Controllers;
 
+[Authorize]
 public class PayrollsController(IMediator mediator):BaseController
 {
     [HttpGet("employee/{employeeId:guid}")]

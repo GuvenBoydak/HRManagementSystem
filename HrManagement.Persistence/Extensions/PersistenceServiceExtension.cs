@@ -25,7 +25,7 @@ public static class PersistenceServiceExtension
                 });
             options.AddInterceptors(new EntityDbContextInterceptor());
         });
-
+        
         services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
         services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         services.AddScoped<IPayrollRepository, PayrollRepository>();

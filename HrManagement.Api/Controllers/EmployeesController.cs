@@ -4,10 +4,12 @@ using HrManagement.Application.Features.Employee.Commands.Update;
 using HrManagement.Application.Features.Employee.Queries.GetAllEmployee;
 using HrManagement.Application.Features.Employee.Queries.GetEmployeeById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+    
 namespace HrManagement.Api.Controllers;
 
+[Authorize]
 public class EmployeesController(IMediator mediator) : BaseController
 {
     [HttpGet]
@@ -16,7 +18,7 @@ public class EmployeesController(IMediator mediator) : BaseController
         var response = await mediator.Send(new GetAllEmployeeQueryRequest());
         return CreateActionResult(response.Response);
     }
-
+    
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id)
     {
