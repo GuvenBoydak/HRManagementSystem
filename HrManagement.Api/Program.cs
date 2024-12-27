@@ -1,16 +1,16 @@
+using HrManagement.Api.Extesions;
+using HrManagement.Api.OptionsSetup;
 using HrManagement.Application.Extensions;
+using HrManagement.Infrastructure.Extensions;
 using HrManagement.Persistence.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddSwaggerService();
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddPersistenceServices(builder.Configuration).AddApplicationServices();
+builder.Services.ConfigureOptions<JwtOptionSetup>();
+builder.Services.AddPersistenceServices(builder.Configuration).AddApplicationServices().AddInfrastructureServices();
 
 var app = builder.Build();
 
@@ -22,7 +22,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthorization();
+
 app.UseAuthentication();
+
+app.UseAuthorization();
+
 app.MapControllers();
+
 app.Run();

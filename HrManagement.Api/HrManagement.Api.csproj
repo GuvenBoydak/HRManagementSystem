@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\HrManagement.Infrastructure\HrManagement.Infrastructure.csproj" />
       <ProjectReference Include="..\HrManagement.Persistence\HrManagement.Persistence.csproj" />
     </ItemGroup>
 

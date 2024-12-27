@@ -5,10 +5,12 @@ using HrManagement.Application.Features.LeaveForm.Commands.Update;
 using HrManagement.Application.Features.LeaveForm.Queries.GetAllWithEmployeeId;
 using HrManagement.Application.Features.LeaveForm.Queries.GetLeaveFormById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HrManagement.Api.Controllers;
 
+[Authorize]
 public class LeaveFormsController(IMediator mediator) : BaseController
 {
     [HttpGet("employee/{employeeId:guid}")]

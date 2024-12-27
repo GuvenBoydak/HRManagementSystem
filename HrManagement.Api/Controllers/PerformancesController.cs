@@ -4,10 +4,12 @@ using HrManagement.Application.Features.Performance.Commands.Update;
 using HrManagement.Application.Features.Performance.Queries.GetAllPerformanceWithEmployeeId;
 using HrManagement.Application.Features.Performance.Queries.GetPerformanceById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HrManagement.Api.Controllers;
 
+[Authorize]
 public class PerformancesController(IMediator mediator) : BaseController
 {
     [HttpGet("employee/{employeeId:guid}")]
