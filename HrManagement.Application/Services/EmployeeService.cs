@@ -18,14 +18,20 @@ public class EmployeeService(IEmployeeRepository employeeRepository, IUnitOfWork
 {
     public async Task<ServiceResult<List<GetAllEmployeeDto>>> GetAllAsync()
     {
-        var employeeResponse = mapper.Map<List<GetAllEmployeeDto>>(await employeeRepository.GetAllAsync());
+        var employeeResponse = mapper.Map<List<GetAllEmployeeDto>>(await employeeRepository.GetAllAsync(false,
+            x=> x.LeaveForms,
+            x=> x.Performances,
+            x=> x.Payrolls));
 
         return ServiceResult<List<GetAllEmployeeDto>>.Success(employeeResponse);
     }
 
     public async Task<ServiceResult<GetEmployeeByIdDto>> GetByIdAsync(Guid id)
     {
-        var employee = await employeeRepository.GetByIdAsync(id);
+        var employee = await employeeRepository.GetByIdAsync(id,false,
+            x=> x.LeaveForms,
+            x=> x.Performances,
+            x=> x.Payrolls);
         if (employee is null)
         {
             return ServiceResult<GetEmployeeByIdDto>.Failure(EmployeeConstant.NotFound);
