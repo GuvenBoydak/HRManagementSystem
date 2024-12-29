@@ -1,5 +1,6 @@
 using System.Net;
 using HrManagement.Application;
+using HrManagement.Application.Constant;
 using HrManagement.Application.Features.AppUser.Commands.Login;
 using HrManagement.Application.Features.AppUser.Commands.Register;
 using HrManagement.Application.Interfaces.Services;
@@ -17,13 +18,13 @@ public class AuthService(UserManager<AppUser> userManager,IJwtProviderService jw
             x.Email == request.EmailOrUserName || x.UserName == request.EmailOrUserName);
         if (checkUser is null)
         {
-            return ServiceResult<TokenDto>.Failure("",HttpStatusCode.NotFound);
+            return ServiceResult<TokenDto>.Failure(UserConstant.NotFound,HttpStatusCode.NotFound);
         }
         
         var checkPassword = await userManager.CheckPasswordAsync(checkUser, request.Password);
         if (!checkPassword)
         {
-            return ServiceResult<TokenDto>.Failure("",HttpStatusCode.BadRequest);
+            return ServiceResult<TokenDto>.Failure(UserConstant.InvalidPassword,HttpStatusCode.BadRequest);
         }
 
         return ServiceResult<TokenDto>.Success(await jwtProviderService.CreateTokenAsync(checkUser));
@@ -35,7 +36,7 @@ public class AuthService(UserManager<AppUser> userManager,IJwtProviderService jw
             x.Email == request.Email || x.UserName == request.UserName);
         if (checkUser is not null)
         {
-            return ServiceResult.Failure("",HttpStatusCode.BadRequest);
+            return ServiceResult.Failure(UserConstant.ExistUser,HttpStatusCode.BadRequest);
         }
         
         var user = new AppUser
