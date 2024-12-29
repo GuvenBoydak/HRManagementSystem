@@ -26,30 +26,29 @@ public class LeaveFormsController(IMediator mediator) : BaseController
         var response = await mediator.Send(new GetLeaveFormByIdQueryRequest(id));
         return CreateActionResult(response.Result);
     }
-
+    
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateLeaveFormCommandRequest request)
     {
         var response = await mediator.Send(request);
         return CreateActionResult(response.Result);
     }
-
     [HttpPut]
     public async Task<IActionResult> Update([FromBody] UpdateLeaveFormCommandRequest request)
     {
         var response = await mediator.Send(request);
         return CreateActionResult(response.Result);
     }
-
+    [Authorize(Roles = "HumanResource")]
     [HttpPut("approve")]
-    public async Task<IActionResult> Update([FromBody] ApproveLeaveFromStatusCommandRequest request)
+    public async Task<IActionResult> Approve([FromBody] ApproveLeaveFromStatusCommandRequest request)
     {
         var response = await mediator.Send(request);
         return CreateActionResult(response.Result);
     }
-
+    [Authorize(Roles = "HumanResource")]
     [HttpPut("reject")]
-    public async Task<IActionResult> Update([FromBody] RejectLeaveFormStatusCommandRequest request)
+    public async Task<IActionResult> Reject([FromBody] RejectLeaveFormStatusCommandRequest request)
     {
         var response = await mediator.Send(request);
         return CreateActionResult(response.Result);

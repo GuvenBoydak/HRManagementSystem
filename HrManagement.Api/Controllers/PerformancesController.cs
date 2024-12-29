@@ -26,21 +26,21 @@ public class PerformancesController(IMediator mediator) : BaseController
         var response = await mediator.Send(new GetPerformanceByIdQueryRequest(id));
         return CreateActionResult(response.Result);
     }
-
+    [Authorize(Roles = "HumanResource")]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreatePerformanceCommandRequest request)
     {
         var response = await mediator.Send(request);
         return CreateActionResult(response.Result);
     }
-
+    [Authorize(Roles = "HumanResource")]
     [HttpPut]
     public async Task<IActionResult> Update([FromBody] UpdatePerformanceCommandRequest request)
     {
         var response = await mediator.Send(request);
         return CreateActionResult(response.Result);
     }
-
+    [Authorize(Roles = "HumanResource")]
     [HttpDelete]
     public async Task<IActionResult> Delete([FromBody] DeletePerformanceCommandRequest request)
     {

@@ -23,12 +23,14 @@ public class PayrollsController(IMediator mediator):BaseController
         var response = await mediator.Send(new GetPayrollByIdQueryRequest(id));
         return CreateActionResult(response.Result);
     }
+    [Authorize(Roles = "HumanResource")]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreatePayrollCommandRequest request)
     {
         var response = await mediator.Send(request);
         return CreateActionResult(response.Result);
     }
+    [Authorize(Roles = "HumanResource")]
     [HttpPut]
     public async Task<IActionResult> Update([FromBody] UpdatePayrollCommandRequest request)
     {
