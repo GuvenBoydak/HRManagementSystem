@@ -1,5 +1,4 @@
 using FluentValidation;
-using HrManagement.Api;
 using HrManagement.Api.ExceptionsHandler;
 using HrManagement.Api.Extesions;
 using HrManagement.Api.OptionsSetup;
