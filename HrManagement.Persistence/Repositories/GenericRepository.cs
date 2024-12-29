@@ -17,34 +17,49 @@ public class GenericRepository<T> : IRepository<T> where T : BaseEntity
         _entity = _context.Set<T>();
     }
 
-    public async Task<List<T>> GetAllAsync(bool isTracking = true)
+    public async Task<List<T>> GetAllAsync(bool isTracking = true,params Expression<Func<T, object>>[] includes)
     {
+        IQueryable<T> query = _entity;
         if (isTracking)
         {
-            return await _entity.AsNoTracking().ToListAsync();
+            return await query.AsNoTracking().ToListAsync();
+        }
+        if (includes?.Length > 0)
+        {
+            query = includes.Aggregate(query, (current, include) => current.Include(include));
         }
 
-        return await _entity.ToListAsync();
+        return await query.ToListAsync();
     }
 
-    public async Task<T?> GetByIdAsync(Guid id, bool isTracking = true)
+    public async Task<T?> GetByIdAsync(Guid id, bool isTracking = true,params Expression<Func<T, object>>[] includes)
     {
+        IQueryable<T> query = _entity;
         if (isTracking)
         {
-            return await _entity.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            return await query.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+        }
+        if (includes?.Length > 0)
+        {
+            query = includes.Aggregate(query, (current, include) => current.Include(include));
         }
 
-        return await _entity.FirstOrDefaultAsync(x => x.Id == id);
+        return await query.FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<List<T>> GetAsync(Expression<Func<T, bool>> predicate, bool isTracking = true)
+    public async Task<List<T>> GetAsync(Expression<Func<T, bool>> predicate,bool isTracking = true,params Expression<Func<T, object>>[] includes)
     {
+        IQueryable<T> query = _entity;
         if (isTracking)
         {
-            return await _entity.AsNoTracking().Where(predicate).ToListAsync();
+            return await query.AsNoTracking().Where(predicate).ToListAsync();
         }
-
-        return await _entity.Where(predicate).ToListAsync();
+        if (includes?.Length > 0)
+        {
+            query = includes.Aggregate(query, (current, include) => current.Include(include));
+        }
+        
+        return await query.Where(predicate).ToListAsync();
     }
 
     public async Task<T?> GetFirstAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken,
