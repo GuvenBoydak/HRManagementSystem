@@ -1,4 +1,3 @@
-using HrManagement.Domain.Entities.Identity;
 using HrManagement.Domain.Enums;
 
 namespace HrManagement.Domain.Entities;
@@ -13,7 +12,7 @@ public class Employee : BaseEntity
     public DateTime DateOfBirth { get; set; }
     public string Address { get; set; }
     public string Position { get; set; }
-    public string Department { get; set; }
+    public EmployeeDepartment Department { get; set; } = 0;
     public decimal Salary { get; set; }
     public DateTime HireDate { get; set; }
     public decimal PerformanceScore { get; set; }

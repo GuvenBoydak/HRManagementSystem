@@ -1,3 +1,7 @@
+using HrManagement.Application.Features.Employee.Queries.GetAllEmployee;
+using HrManagement.Application.Features.LeaveForm.Queries.GetLeaveFormById;
+using HrManagement.Application.Features.Payroll.Queries.GetPayrollById;
+using HrManagement.Application.Features.Performance.Queries.GetPerformanceById;
 using HrManagement.Domain.Enums;
 
 namespace HrManagement.Application.Features.Employee.Queries.GetEmployeeById;
@@ -12,7 +16,7 @@ public record GetEmployeeByIdDto(
     DateTime DateOfBirth,
     string Address,
     string Position,
-    string Department,
+    EmployeeDepartment Department,
     decimal Salary,
     DateTime HireDate,
     decimal PerformanceScore,
@@ -20,4 +24,7 @@ public record GetEmployeeByIdDto(
     DateTime CreatedDate,
     DateTime UpdatedDate,
     DateTime DeletedDate,
-    bool IsDeleted);
+    bool IsDeleted,
+    List<GetLeaveFormByIdDto> LeaveForms,
+    List<GetPerformanceByIdDto> Performances,
+    List<GetPayrollByIdDto> Payrolls);

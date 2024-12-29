@@ -12,7 +12,7 @@ public record UpdateEmployeeCommandRequest(
     DateTime DateOfBirth,
     string Address,
     string Position,
-    string Department,
+    EmployeeDepartment Department,
     decimal Salary,
     DateTime HireDate,
     decimal PerformanceScore,
