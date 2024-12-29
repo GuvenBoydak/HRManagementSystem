@@ -17,7 +17,7 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
         builder.Property(x => x.DateOfBirth).IsRequired();
         builder.Property(x => x.Address).IsRequired();
         builder.Property(x => x.Position).IsRequired().HasMaxLength(80);
-        builder.Property(x => x.Department).IsRequired().HasMaxLength(80);
+        builder.Property(x => x.Department).IsRequired();
         builder.Property(x => x.Salary).IsRequired().HasColumnType("decimal(18, 2)");
         builder.Property(x => x.PerformanceScore).HasColumnType("decimal(18, 2)");
         builder.Property(x => x.HireDate).IsRequired();
