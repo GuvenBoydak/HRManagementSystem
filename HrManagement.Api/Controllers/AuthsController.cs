@@ -1,5 +1,4 @@
 using HrManagement.Application.Features.AppUser.Commands.Login;
-using HrManagement.Application.Features.AppUser.Commands.Register;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,10 +13,4 @@ public class AuthsController(IMediator mediator):BaseController
         return CreateActionResult(response.Result);
     }
     
-    [HttpPost("register")]
-    public async Task<IActionResult> Register(RegisterAppUserCommandRequest request)
-    {
-        var response = await mediator.Send(request);
-        return CreateActionResult(response.Result);
-    }
 }

@@ -2,7 +2,6 @@ using System.Net;
 using HrManagement.Application;
 using HrManagement.Application.Constant;
 using HrManagement.Application.Features.AppUser.Commands.Login;
-using HrManagement.Application.Features.AppUser.Commands.Register;
 using HrManagement.Application.Interfaces.Services;
 using HrManagement.Domain.Entities.Identity;
 using HrManagement.Domain.Shared.Dtos;
@@ -12,6 +11,17 @@ namespace HrManagement.Infrastructure.Service.Auth;
 
 public class AuthService(UserManager<AppUser> userManager,IJwtProviderService jwtProviderService):IAuthService
 {
+    public async Task<ServiceResult<AppUser>> GetByIdAsync(Guid id)
+    {
+        var user = await userManager.FindByIdAsync(id.ToString());
+        if (user is null)
+        {
+            return ServiceResult<AppUser>.Failure(UserConstant.NotFound, HttpStatusCode.NotFound);
+        }
+
+        return ServiceResult<AppUser>.Success(user);
+    }
+
     public async Task<ServiceResult<TokenDto>> LoginAsync(LoginAppUserCommandRequest request)
     {
         var checkUser = userManager.Users.FirstOrDefault(x =>
@@ -30,27 +40,21 @@ public class AuthService(UserManager<AppUser> userManager,IJwtProviderService jw
         return ServiceResult<TokenDto>.Success(await jwtProviderService.CreateTokenAsync(checkUser));
     }
 
-    public async Task<ServiceResult> RegisterAsync(RegisterAppUserCommandRequest request)
+    public async Task<ServiceResult> RegisterAsync(AppUser user,string password)
     {
         var checkUser = userManager.Users.FirstOrDefault(x =>
-            x.Email == request.Email || x.UserName == request.UserName);
+            x.Email == user.Email || x.UserName == user.UserName);
         if (checkUser is not null)
         {
             return ServiceResult.Failure(UserConstant.ExistUser,HttpStatusCode.BadRequest);
         }
         
-        var user = new AppUser
-        {
-            NameSurname = request.FirstName + request.Surname,
-            UserName = request.UserName,
-            Email = request.Email
-        };
-        
-        var result = await userManager.CreateAsync(user, request.Password);
+        var result = await userManager.CreateAsync(user, password);
         if (!result.Succeeded)
         {
             return ServiceResult.Failure(string.Join(", ", result.Errors.Select(e => e.Description)));
         }
+    
 
         return ServiceResult.Success(HttpStatusCode.NoContent);
     }
