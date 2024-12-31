@@ -9,7 +9,9 @@ public class EntityDbContextInterceptor : SaveChangesInterceptor
     private readonly Dictionary<EntityState, Action<DbContext, BaseEntity>> _auditActions = new()
     {
         { EntityState.Added, AddBehaivor },
-        { EntityState.Modified, UpdateBehaivor }
+        { EntityState.Modified, UpdateBehaivor },
+        { EntityState.Deleted, DeleteBehaivor },
+        { EntityState.Unchanged, UnchangedBehavior }
     };
 
     private static void AddBehaivor(DbContext context, BaseEntity entity)
@@ -31,6 +33,8 @@ public class EntityDbContextInterceptor : SaveChangesInterceptor
         context.Entry(entity).Property(x => x.CreatedDate).IsModified = false;
         context.Entry(entity).Property(x => x.UpdatedDate).IsModified = false;
     }
+    
+    private static void UnchangedBehavior(DbContext context, BaseEntity entity) { }
 
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData,
         InterceptionResult<int> result,
