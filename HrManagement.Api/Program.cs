@@ -4,8 +4,11 @@ using HrManagement.Api.Extesions;
 using HrManagement.Api.OptionsSetup;
 using HrManagement.Application;
 using HrManagement.Application.Extensions;
+using HrManagement.Domain.Entities.Identity;
 using HrManagement.Infrastructure.Extensions;
+using HrManagement.Infrastructure.Helpers;
 using HrManagement.Persistence.Extensions;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,4 +38,11 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+using(var scoped = app.Services.CreateScope())
+{
+    var userManager = scoped.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+    var roleManager = scoped.ServiceProvider.GetRequiredService<RoleManager<AppRole>>();
+    
+    CreateAdminAndRole.CreateAdminAsync(userManager,roleManager).Wait();
+}
 app.Run();
