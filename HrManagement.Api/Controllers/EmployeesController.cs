@@ -1,3 +1,4 @@
+using HrManagement.Application.Constant;
 using HrManagement.Application.Features.Employee.Commands.Create;
 using HrManagement.Application.Features.Employee.Commands.Delete;
 using HrManagement.Application.Features.Employee.Commands.Update;
@@ -25,21 +26,21 @@ public class EmployeesController(IMediator mediator) : BaseController
         var response = await mediator.Send(new GetEmployeeByIdQueryRequest(id));
         return CreateActionResult(response.Response);
     }
-    [Authorize(Roles = "HumanResource")]
+    [Authorize(Roles = $"{EmployeeConstant.HumanResources},{RoleConstant.Admin}")]
     [HttpPost]
     public async Task<IActionResult> Create(CreateEmployeeCommandRequest request)
     {
         var response = await mediator.Send(request);
         return CreateActionResult(response.Response);
     }
-    [Authorize(Roles = "HumanResource")]
+    [Authorize(Roles = $"{EmployeeConstant.HumanResources},{RoleConstant.Admin}")]
     [HttpPut]
     public async Task<IActionResult> Update(UpdateEmployeeCommandRequest request)
     {
         var response = await mediator.Send(request);
         return CreateActionResult(response.Response);
     }
-    [Authorize(Roles = "HumanResource")]
+    [Authorize(Roles = $"{EmployeeConstant.HumanResources},{RoleConstant.Admin}")]
     [HttpDelete]
     public async Task<IActionResult> Delete(DeleteEmployeeCommandRequest request)
     {
