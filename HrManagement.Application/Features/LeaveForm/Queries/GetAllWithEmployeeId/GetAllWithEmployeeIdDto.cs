@@ -1,3 +1,4 @@
+using HrManagement.Application.Features.Employee.Dtos;
 using HrManagement.Domain.Enums;
 
 namespace HrManagement.Application.Features.LeaveForm.Queries.GetAllWithEmployeeId;
@@ -11,8 +12,9 @@ public record GetAllWithEmployeeIdDto(
     string Reason,
     Guid EmployeeId,
     Guid ApprovedUserId,
-    Guid ApprovalDate,
+    DateTime ApprovalDate,
     DateTime CreatedDate,
     DateTime UpdatedDate,
     DateTime DeletedDate,
-    bool IsDeleted);
+    bool IsDeleted,
+    EmployeeDto Employee);

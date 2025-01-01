@@ -1,6 +1,7 @@
 using AutoMapper;
 using HrManagement.Application.Features.Employee.Commands.Create;
 using HrManagement.Application.Features.Employee.Commands.Update;
+using HrManagement.Application.Features.Employee.Dtos;
 using HrManagement.Application.Features.Employee.Queries.GetAllEmployee;
 using HrManagement.Application.Features.Employee.Queries.GetEmployeeById;
 using HrManagement.Domain.Entities;
@@ -15,5 +16,6 @@ public class EmployeeMappingProfile : Profile
         CreateMap<Employee, UpdateEmployeeCommandRequest>().ReverseMap();
         CreateMap<Employee, GetAllEmployeeDto>().ReverseMap();
         CreateMap<Employee, GetEmployeeByIdDto>().ReverseMap();
+        CreateMap<Employee, EmployeeDto>().ReverseMap();
     }
 }

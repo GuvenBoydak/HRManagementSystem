@@ -1,3 +1,5 @@
+using HrManagement.Application.Features.Employee.Dtos;
+
 namespace HrManagement.Application.Features.Payroll.Queries.GetPayrollsWithEmployeeId;
 
 public record GetPayrollsWithEmployeeIdDto(Guid Id,
@@ -12,4 +14,9 @@ public record GetPayrollsWithEmployeeIdDto(Guid Id,
     string BankAccountNumber,
     string Comments,
     decimal RetirementFund,
-    Guid EmployeeId);
+    Guid EmployeeId,
+    DateTime CreatedDate,
+    DateTime UpdatedDate,
+    DateTime DeletedDate,
+    bool IsDeleted,
+    EmployeeDto Employee);

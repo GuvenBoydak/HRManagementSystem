@@ -1,3 +1,5 @@
+using HrManagement.Application.Features.Employee.Dtos;
+
 namespace HrManagement.Application.Features.Performance.Queries.GetAllPerformanceWithEmployeeId;
 
 public record GetAllPerformanceWithEmployeeIdDto(
@@ -15,4 +17,5 @@ public record GetAllPerformanceWithEmployeeIdDto(
     DateTime CreatedDate,
     DateTime UpdatedDate,
     DateTime DeletedDate,
-    bool IsDeleted);
+    bool IsDeleted,
+    EmployeeDto Employee);

@@ -1,6 +1,7 @@
 using AutoMapper;
 using HrManagement.Application.Features.Payroll.Commands.Create;
 using HrManagement.Application.Features.Payroll.Commands.Update;
+using HrManagement.Application.Features.Payroll.Dtos;
 using HrManagement.Application.Features.Payroll.Queries.GetPayrollById;
 using HrManagement.Application.Features.Payroll.Queries.GetPayrollsWithEmployeeId;
 using HrManagement.Domain.Entities;
@@ -15,5 +16,6 @@ public class PayrollMappingProfile: Profile
         CreateMap<Payroll, GetPayrollByIdDto>().ReverseMap();
         CreateMap<Payroll,CreatePayrollCommandRequest>().ReverseMap();
         CreateMap<Payroll,UpdatePayrollCommandRequest>().ReverseMap();
+        CreateMap<Payroll, PayrollDto>().ReverseMap();
     }
 }

@@ -1,10 +1,8 @@
-using HrManagement.Application.Features.Employee.Dtos;
 using HrManagement.Domain.Enums;
 
-namespace HrManagement.Application.Features.LeaveForm.Queries.GetLeaveFormById;
+namespace HrManagement.Application.Features.LeaveForm.Dtos;
 
-public record GetLeaveFormByIdDto(
-    Guid Id,
+public record LeaveFormDto(Guid Id,
     DateTime StartDate,
     DateTime EndDate,
     int TotalDays,
@@ -16,5 +14,4 @@ public record GetLeaveFormByIdDto(
     DateTime CreatedDate,
     DateTime UpdatedDate,
     DateTime DeletedDate,
-    bool IsDeleted,
-    EmployeeDto Employee);
+    bool IsDeleted);
