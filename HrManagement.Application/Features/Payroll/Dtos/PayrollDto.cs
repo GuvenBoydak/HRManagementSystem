@@ -1,8 +1,6 @@
-using HrManagement.Application.Features.Employee.Dtos;
+namespace HrManagement.Application.Features.Payroll.Dtos;
 
-namespace HrManagement.Application.Features.Payroll.Queries.GetPayrollById;
-
-public record GetPayrollByIdDto(Guid Id,
+public record PayrollDto(Guid Id,
     decimal BasicSalary,
     decimal Allowances,
     decimal Overtime,
@@ -18,5 +16,4 @@ public record GetPayrollByIdDto(Guid Id,
     DateTime CreatedDate,
     DateTime UpdatedDate,
     DateTime DeletedDate,
-    bool IsDeleted,
-    EmployeeDto Employee);
+    bool IsDeleted);

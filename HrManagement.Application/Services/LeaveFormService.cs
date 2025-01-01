@@ -20,7 +20,10 @@ public class LeaveFormService(ILeaveFormRepository leaveFormRepository, IUnitOfW
 {
     public async Task<ServiceResult<List<GetAllWithEmployeeIdDto>>> GetAllWithEmployeeIdAsync(Guid employeeId)
     {
-        var leaveForms = await leaveFormRepository.GetAsync(x => x.EmployeeId == employeeId, false);
+        var leaveForms = await leaveFormRepository.GetAsync(x => x.EmployeeId == employeeId,
+            false,
+            x=>x.Employee,
+            x=>x.ApprovedUser);
 
         var leaveFormsDto = mapper.Map<List<GetAllWithEmployeeIdDto>>(leaveForms);
 
@@ -29,7 +32,10 @@ public class LeaveFormService(ILeaveFormRepository leaveFormRepository, IUnitOfW
 
     public async Task<ServiceResult<GetLeaveFormByIdDto>> GetByIdAsync(Guid id)
     {
-        var leaveForm = await leaveFormRepository.GetByIdAsync(id);
+        var leaveForm = await leaveFormRepository.GetByIdAsync(id,
+            false,
+            x=>x.Employee,
+            x=>x.ApprovedUser);
         if (leaveForm is null)
         {
             return ServiceResult<GetLeaveFormByIdDto>.Failure(LeaveFormConstant.NotFound, HttpStatusCode.NotFound);

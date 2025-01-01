@@ -19,7 +19,9 @@ public class PerformanceService(IPerformanceRepository performanceRepository, IU
     public async Task<ServiceResult<List<GetAllPerformanceWithEmployeeIdDto>>> GetAllPerformanceWithEmployeeIdAsync(
         Guid employeeId)
     {
-        var performance = await performanceRepository.GetAsync(x => x.EmployeeId == employeeId, false);
+        var performance = await performanceRepository.GetAsync(x => x.EmployeeId == employeeId,
+            false,
+            x => x.Employee);
 
         var performanceDto = mapper.Map<List<GetAllPerformanceWithEmployeeIdDto>>(performance);
 
@@ -28,7 +30,9 @@ public class PerformanceService(IPerformanceRepository performanceRepository, IU
 
     public async Task<ServiceResult<GetPerformanceByIdDto>> GetPerformanceByIdAsync(Guid performanceId)
     {
-        var performance = await performanceRepository.GetByIdAsync(performanceId);
+        var performance = await performanceRepository.GetByIdAsync(performanceId,
+            false,
+            x => x.Employee);
         if (performance is null)
         {
             return ServiceResult<GetPerformanceByIdDto>.Failure(PerformanceConstant.NotFound, HttpStatusCode.NotFound);

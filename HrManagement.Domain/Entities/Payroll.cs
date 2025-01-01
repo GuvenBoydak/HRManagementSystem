@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace HrManagement.Domain.Entities;
 
 public class Payroll : BaseEntity
@@ -13,9 +11,7 @@ public class Payroll : BaseEntity
     public string BankAccountNumber { get; set; }
     public string? Comments { get; set; }
     public decimal RetirementFund { get; set; }
-    //[NotMapped]
     public decimal GrossSalary => BasicSalary + Allowances + Deductions + Tax + Overtime;
-    //[NotMapped]
     public decimal NetSalary => GrossSalary - Deductions - Tax;
     
     public Guid EmployeeId { get; set; }

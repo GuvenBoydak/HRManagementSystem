@@ -16,7 +16,9 @@ public class PayrollService(IPayrollRepository payrollRepository, IUnitOfWork un
 {
     public async Task<ServiceResult<List<GetPayrollsWithEmployeeIdDto>>> GetPayrollsWithEmployeeIdAsync(Guid employeeId)
     {
-        var payrolls = await payrollRepository.GetAsync(x => x.EmployeeId == employeeId);
+        var payrolls = await payrollRepository.GetAsync(x => x.EmployeeId == employeeId,
+            false,
+            x => x.Employee);
 
         var payrollsDto = mapper.Map<List<GetPayrollsWithEmployeeIdDto>>(payrolls);
 
@@ -25,7 +27,9 @@ public class PayrollService(IPayrollRepository payrollRepository, IUnitOfWork un
 
     public async Task<ServiceResult<GetPayrollByIdDto>> GetPayrollByIdAsync(Guid id)
     {
-        var payroll = await payrollRepository.GetByIdAsync(id);
+        var payroll = await payrollRepository.GetByIdAsync(id,
+            false,
+            x => x.Employee);
         if (payroll is null)
         {
             return ServiceResult<GetPayrollByIdDto>.Failure("", HttpStatusCode.NotFound);

@@ -1,6 +1,7 @@
 using AutoMapper;
 using HrManagement.Application.Features.Performance.Commands.Create;
 using HrManagement.Application.Features.Performance.Commands.Update;
+using HrManagement.Application.Features.Performance.Dtos;
 using HrManagement.Application.Features.Performance.Queries.GetAllPerformanceWithEmployeeId;
 using HrManagement.Application.Features.Performance.Queries.GetPerformanceById;
 using HrManagement.Domain.Entities;
@@ -15,5 +16,6 @@ public class PerformanceMappingProfile : Profile
         CreateMap<Performance, GetPerformanceByIdDto>().ReverseMap();
         CreateMap<CreatePerformanceCommandRequest, Performance>().ReverseMap();
         CreateMap<UpdatePerformanceCommandRequest, Performance>().ReverseMap();
+        CreateMap<Performance, PerformanceDto>().ReverseMap();
     }
 }

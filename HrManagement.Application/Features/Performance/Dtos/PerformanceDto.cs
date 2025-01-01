@@ -1,9 +1,6 @@
-using HrManagement.Application.Features.Employee.Dtos;
+namespace HrManagement.Application.Features.Performance.Dtos;
 
-namespace HrManagement.Application.Features.Performance.Queries.GetPerformanceById;
-
-public record GetPerformanceByIdDto(
-    Guid Id,
+public record PerformanceDto(Guid Id,
     string FeedBack,
     int WorkPerformanceScore,
     int TeamworkScore,
@@ -17,5 +14,4 @@ public record GetPerformanceByIdDto(
     DateTime CreatedDate,
     DateTime UpdatedDate,
     DateTime DeletedDate,
-    bool IsDeleted,
-    EmployeeDto Employee);
+    bool IsDeleted);

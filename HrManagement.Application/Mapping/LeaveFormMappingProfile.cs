@@ -1,6 +1,7 @@
 using AutoMapper;
 using HrManagement.Application.Features.LeaveForm.Commands.Create;
 using HrManagement.Application.Features.LeaveForm.Commands.Update;
+using HrManagement.Application.Features.LeaveForm.Dtos;
 using HrManagement.Application.Features.LeaveForm.Queries.GetAllWithEmployeeId;
 using HrManagement.Application.Features.LeaveForm.Queries.GetLeaveFormById;
 using HrManagement.Domain.Entities;
@@ -15,5 +16,6 @@ public class LeaveFormMappingProfile : Profile
         CreateMap<LeaveForm, GetAllWithEmployeeIdDto>().ReverseMap();
         CreateMap<CreateLeaveFormCommandRequest, LeaveForm>().ReverseMap();
         CreateMap<UpdateLeaveFormCommandRequest, LeaveForm>().ReverseMap();
+        CreateMap<LeaveForm, LeaveFormDto>().ReverseMap();
     }
 }
