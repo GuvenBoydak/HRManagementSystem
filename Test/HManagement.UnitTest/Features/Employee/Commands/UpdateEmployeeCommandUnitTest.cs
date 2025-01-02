@@ -22,17 +22,18 @@ public class UpdateEmployeeCommandUnitTest
     [Fact]
     public async Task Handle_ShouldReturnSuccessResponse_WhenEmployeeIsUpdatedSuccessfully()
     {
+        // Arrange
         var request = CreateUpdateEmployeeCommandRequest();
         
         var serviceResult = ServiceResult.Success();
         _employeeService
             .Setup(s => s.UpdateAsync(request))
             .ReturnsAsync(serviceResult);
-        
-        var handler = new UpdateEmployeeCommandHandler(_employeeService.Object);
 
-        UpdateEmployeeCommandResponse response = await handler.Handle(request, default);
+        // Act
+        UpdateEmployeeCommandResponse response = await _handler.Handle(request, default);
         
+        // Assert
         response.ShouldNotBeNull();
         response.Response.ShouldBe(serviceResult);
         response.Response.IsSuccess.ShouldBeTrue();
@@ -42,17 +43,18 @@ public class UpdateEmployeeCommandUnitTest
     [Fact]
     public async Task Handle_ShouldReturnFailureResponse_WhenEmployeeUpdateFails()
     {
+        // Arrange
         var request = CreateUpdateEmployeeCommandRequest();
         
         var serviceResult = ServiceResult.Failure("Failed to update employee", HttpStatusCode.InternalServerError);
         _employeeService
             .Setup(s => s.UpdateAsync(request))
             .ReturnsAsync(serviceResult);
-        
-        var handler = new UpdateEmployeeCommandHandler(_employeeService.Object);
 
-        UpdateEmployeeCommandResponse response = await handler.Handle(request, default);
+        // Act
+        UpdateEmployeeCommandResponse response = await _handler.Handle(request, default);
         
+        // Assert
         response.ShouldNotBeNull();
         response.Response.ShouldBe(serviceResult);
         response.Response.ErrorMessages.ShouldNotBeNull();

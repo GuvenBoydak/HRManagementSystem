@@ -1,4 +1,4 @@
-using HrManagement.Application.Features.LeaveForm.Commands.ApproveLeaveFormStatus;
+using HrManagement.Application.Features.LeaveForm.Commands.AproveLeaveFormStatus;
 using HrManagement.Application.Features.LeaveForm.Commands.Create;
 using HrManagement.Application.Features.LeaveForm.Commands.RejectLeaveFormStatus;
 using HrManagement.Application.Features.LeaveForm.Commands.Update;
@@ -13,6 +13,6 @@ public interface ILeaveFormService
     Task<ServiceResult<GetLeaveFormByIdDto>> GetByIdAsync(Guid id);
     Task<ServiceResult<Guid>> AddAsync(CreateLeaveFormCommandRequest request, CancellationToken cancellationToken);
     Task<ServiceResult> UpdateAsync(UpdateLeaveFormCommandRequest request);
-    Task<ServiceResult> ApproveLeaveFormStatus(ApproveLeaveFromStatusCommandRequest request);
+    Task<ServiceResult> ApproveLeaveFormStatus(AproveLeaveFromStatusCommandRequest request);
     Task<ServiceResult> RejectLeaveFormStatus(RejectLeaveFormStatusCommandRequest request);
 }

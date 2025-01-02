@@ -1,4 +1,4 @@
-using HrManagement.Application.Features.LeaveForm.Commands.ApproveLeaveFormStatus;
+using HrManagement.Application.Features.LeaveForm.Commands.AproveLeaveFormStatus;
 using HrManagement.Application.Features.LeaveForm.Commands.Create;
 using HrManagement.Application.Features.LeaveForm.Commands.RejectLeaveFormStatus;
 using HrManagement.Application.Features.LeaveForm.Commands.Update;
@@ -41,7 +41,7 @@ public class LeaveFormsController(IMediator mediator) : BaseController
     }
     [Authorize(Roles = "HumanResource")]
     [HttpPut("approve")]
-    public async Task<IActionResult> Approve([FromBody] ApproveLeaveFromStatusCommandRequest request)
+    public async Task<IActionResult> Approve([FromBody] AproveLeaveFromStatusCommandRequest request)
     {
         var response = await mediator.Send(request);
         return CreateActionResult(response.Result);

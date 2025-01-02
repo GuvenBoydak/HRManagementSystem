@@ -1,7 +1,7 @@
 using System.Net;
 using AutoMapper;
 using HrManagement.Application.Constant;
-using HrManagement.Application.Features.LeaveForm.Commands.ApproveLeaveFormStatus;
+using HrManagement.Application.Features.LeaveForm.Commands.AproveLeaveFormStatus;
 using HrManagement.Application.Features.LeaveForm.Commands.Create;
 using HrManagement.Application.Features.LeaveForm.Commands.RejectLeaveFormStatus;
 using HrManagement.Application.Features.LeaveForm.Commands.Update;
@@ -73,7 +73,7 @@ public class LeaveFormService(ILeaveFormRepository leaveFormRepository, IUnitOfW
         return ServiceResult.Success(HttpStatusCode.NoContent);
     }
 
-    public async Task<ServiceResult> ApproveLeaveFormStatus(ApproveLeaveFromStatusCommandRequest request)
+    public async Task<ServiceResult> ApproveLeaveFormStatus(AproveLeaveFromStatusCommandRequest request)
     {
         return await UpdateLeaveFormStatus(request.Id, LeaveStatus.Approved, request.ApprovedId, "");
     }
