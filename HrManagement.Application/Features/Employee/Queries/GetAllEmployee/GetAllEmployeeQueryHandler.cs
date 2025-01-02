@@ -1,4 +1,3 @@
-using HrManagement.Application.Features.Employee.Queries.GetEmployeeById;
 using HrManagement.Application.Interfaces.Services;
 
 namespace HrManagement.Application.Features.Employee.Queries.GetAllEmployee;

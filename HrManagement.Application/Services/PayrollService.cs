@@ -1,5 +1,6 @@
 using System.Net;
 using AutoMapper;
+using HrManagement.Application.Constant;
 using HrManagement.Application.Features.Payroll.Commands.Create;
 using HrManagement.Application.Features.Payroll.Commands.Update;
 using HrManagement.Application.Features.Payroll.Queries.GetPayrollById;
@@ -32,7 +33,7 @@ public class PayrollService(IPayrollRepository payrollRepository, IUnitOfWork un
             x => x.Employee);
         if (payroll is null)
         {
-            return ServiceResult<GetPayrollByIdDto>.Failure("", HttpStatusCode.NotFound);
+            return ServiceResult<GetPayrollByIdDto>.Failure(PayrollConstant.NotFound, HttpStatusCode.NotFound);
         }
 
         var payrollDto = mapper.Map<GetPayrollByIdDto>(payroll);
@@ -56,7 +57,7 @@ public class PayrollService(IPayrollRepository payrollRepository, IUnitOfWork un
         var payroll = await payrollRepository.GetByIdAsync(request.Id);
         if (payroll is null)
         {
-            return ServiceResult.Failure("", HttpStatusCode.NotFound);
+            return ServiceResult.Failure(PayrollConstant.NotFound, HttpStatusCode.NotFound);
         }
 
         var updatedPayroll = mapper.Map(request, payroll);

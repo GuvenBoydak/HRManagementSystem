@@ -18,6 +18,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HrManagement.Api", "HrManagement.Api\HrManagement.Api.csproj", "{5B157C79-7972-4D02-B159-100594A19930}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{32384F9C-3E1C-47F3-8539-322549FE4FE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HManagement.UnitTest", "Test\HManagement.UnitTest\HManagement.UnitTest.csproj", "{D2E05C90-3A4D-4FBD-880B-26CBA0FF09F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +36,7 @@ Global
 		{9622E3C1-CEC1-45ED-BBD4-49CAC8E6A113} = {FE021899-0971-48CA-929D-062AD18E1AD4}
 		{E6DF838A-57D5-4B03-A75D-E0B5FBD2CB3C} = {552C8B25-D99F-4FB3-B9EE-0373101DBBB0}
 		{5B157C79-7972-4D02-B159-100594A19930} = {E6DF838A-57D5-4B03-A75D-E0B5FBD2CB3C}
+		{D2E05C90-3A4D-4FBD-880B-26CBA0FF09F0} = {32384F9C-3E1C-47F3-8539-322549FE4FE8}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D6DFB6E6-1165-4C6C-9835-BFA99BD0B818}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -54,5 +59,9 @@ Global
 		{5B157C79-7972-4D02-B159-100594A19930}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B157C79-7972-4D02-B159-100594A19930}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B157C79-7972-4D02-B159-100594A19930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2E05C90-3A4D-4FBD-880B-26CBA0FF09F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2E05C90-3A4D-4FBD-880B-26CBA0FF09F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2E05C90-3A4D-4FBD-880B-26CBA0FF09F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2E05C90-3A4D-4FBD-880B-26CBA0FF09F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
