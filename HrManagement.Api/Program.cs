@@ -20,6 +20,17 @@ builder.Services.AddPersistenceServices(builder.Configuration).AddApplicationSer
 builder.Services.AddValidatorsFromAssembly(typeof(ApplicationAssembly).Assembly);
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "Client",
+        policy =>
+        {
+            policy.AllowAnyOrigin() 
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,6 +42,8 @@ if (app.Environment.IsDevelopment())
 app.UseExceptionHandler(x=>{});
 
 app.UseHttpsRedirection();
+
+app.UseCors("Client");
 
 app.UseAuthentication();
 

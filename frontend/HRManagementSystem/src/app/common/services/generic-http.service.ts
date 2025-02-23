@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class GenericHttpService {
 
-  api = 'http://localhost:44300/api'; 
+  api = 'http://localhost:5062/api'; 
   headers :any; 
   constructor(
     private _http: HttpClient,
