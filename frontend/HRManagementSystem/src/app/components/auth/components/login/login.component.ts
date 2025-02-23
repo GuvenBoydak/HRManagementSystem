@@ -29,7 +29,7 @@ export class LoginComponent {
 
     this._auth.login(loginModel, res => {
       localStorage.setItem('token', res.data.accessToken);
-      this.router.navigate(['/employees']);
+      this.router.navigate(['/employee']);
     });
   }
 }

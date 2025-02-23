@@ -2,6 +2,6 @@ namespace HrManagement.Domain.Enums;
 
 public enum EmployeeGender
 {
-    Male = 0,
-    Female = 1
+    Male = 1,
+    Female = 2
 }
