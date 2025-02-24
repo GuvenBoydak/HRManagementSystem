@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './employee.component.css'
 })
 export class EmployeeComponent implements OnInit {
+  role: string;
   search: string;
   employees: EmployeeModel[] = [];
   departmentEnum = Department;
@@ -23,7 +24,9 @@ export class EmployeeComponent implements OnInit {
     private _employee: EmployeeService,
     private _toastr: ToastrService,
     private router: Router
-  ) { }
+  ) {
+    this.role = localStorage.getItem('role');
+   }
   ngOnInit(): void {
     this.getAll();
   }

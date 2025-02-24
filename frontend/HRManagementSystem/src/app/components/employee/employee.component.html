@@ -5,7 +5,7 @@
     <div class="col-md-4" style="float: right; padding: 5px;">
         <input type="search" [(ngModel)]="search" class="form-control" placeholder="Aranacak Deger Yazınız...">
     </div>
-    <app-table [heads]='["#","Çalişan Adı Soyad","Departmant","Pozisyon","email","İşe Başlangıç","Adres"]'>
+    <app-table [heads]='["#","Çalişan Adı Soyad","Departmant","Pozisyon","Email","Telefon","İşe Başlangıç"]'>
         @for (employee of employees; track $index) {
         <tr>
             <td>{{ $index + 1 }}</td>
@@ -13,12 +13,14 @@
             <td>{{ departmentEnum[employee.department] }}</td>
             <td>{{ employee.position }}</td>
             <td>{{ employee.email }}</td>
+            <td>{{ employee.phone }}</td>
             <td>{{ employee.hireDate | date: "dd.MMM.yyyy"}}</td>
-            <td>{{ employee.address }}</td>
-            <td>
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editModal"
-                    (click)="detailEmployee(employee)">Detay</button>
-                }
+            @if(role == "Admin" || role == "Manager" || role == "HumanResources") {
+                <td>
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editModal"
+                        (click)="detailEmployee(employee)">Detay</button>
+                    }
+            }
     </app-table>
 </div>
 
