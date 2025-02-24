@@ -8,6 +8,11 @@ export const routes: Routes = [
     {
         path: "",
         loadComponent: () => import("./components/layouts/layout/layout.component").then(c => c.LayoutComponent),
-        children: []
+        children: [
+            {
+                path:"employee",
+                loadComponent: ()=> import("./components/employee/employee.component").then(c=> c.EmployeeComponent)    
+            }
+        ]
     }
 ];

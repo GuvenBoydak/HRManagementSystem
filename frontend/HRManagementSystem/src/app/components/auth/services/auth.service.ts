@@ -3,6 +3,7 @@ import { GenericHttpService } from '../../../common/services/generic-http.servic
 import { LoginModel } from '../components/login/models/login.model';
 import { ResponseModel } from '../../../common/models/response.model';
 import { TokenModel } from '../components/login/models/token.model';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,25 @@ export class AuthService {
   ) { }
 
   login(model:LoginModel,callBack: (res: ResponseModel<TokenModel>) => void){
-    this._http.post<ResponseModel<TokenModel>>('auths/login',model,res=> callBack(res));
+    this._http.post<ResponseModel<TokenModel>>('auths/login',model,res=> {
+      localStorage.setItem('token', res.data.accessToken);
+      localStorage.setItem('role', this.getUserRole());
+      callBack(res)
+    });
+  }
+
+  getUserRole(): string | null {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token) as Record<string, any>; // Tip güvenli hale getiriyoruz
+        const roleKey = Object.keys(decodedToken).find(key => key.includes('role')); // Dinamik olarak role key'ini bul
+        return roleKey ? decodedToken[roleKey] : null;
+      } catch (error) {
+        console.error('Token çözümleme hatası:', error);
+        return null;
+      }
+    }
+    return null;
   }
 }

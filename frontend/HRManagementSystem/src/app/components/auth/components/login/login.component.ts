@@ -28,8 +28,7 @@ export class LoginComponent {
     loginModel.password = password;
 
     this._auth.login(loginModel, res => {
-      localStorage.setItem('token', res.data.accessToken);
-      this.router.navigate(['/employees']);
+      this.router.navigate(['/employee']);
     });
   }
 }

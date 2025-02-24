@@ -2,7 +2,7 @@ namespace HrManagement.Domain.Enums;
 
 public enum EmployeeDepartment
 {
-    Employee,
-    HumanResources,
-    Manager
+    Employee = 1,
+    HumanResources = 2,
+    Manager = 3
 }
