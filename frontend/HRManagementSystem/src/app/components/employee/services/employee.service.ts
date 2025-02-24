@@ -12,9 +12,13 @@ export class EmployeeService {
     private _http: GenericHttpService
   ) { }
 
-  getAll(callBack: (res: ResponseModel<EmployeeModel[]>)=> void){
-    this._http.get<ResponseModel<EmployeeModel[]>>("employees",res=> {
+  getAll(callBack: (res: ResponseModel<EmployeeModel[]>) => void) {
+    this._http.get<ResponseModel<EmployeeModel[]>>("employees", res => {
       callBack(res);
     });
+  }
+
+  add(model: EmployeeModel, callBack: (res: ResponseModel<string>) => void) {
+    this._http.post<ResponseModel<string>>("employees", model, res => callBack(res));
   }
 }
