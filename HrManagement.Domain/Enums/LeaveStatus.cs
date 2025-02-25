@@ -2,7 +2,7 @@ namespace HrManagement.Domain.Enums;
 
 public enum LeaveStatus
 {
-    Pending = 0,
-    Approved = 1,
-    Rejected = 2
+    Pending = 1,
+    Approved = 2,
+    Rejected = 3
 }
