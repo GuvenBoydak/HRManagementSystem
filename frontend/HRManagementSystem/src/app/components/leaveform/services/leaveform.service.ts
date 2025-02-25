@@ -15,4 +15,8 @@ export class LeaveformService {
   getLeaveFromsWitEmployeeId(id:string,callBack: (res: ResponseModel<leaveFormModel[]>)=> void){
     this._http.get<ResponseModel<leaveFormModel[]>>(`leaveforms/employee/${id}`,res=> callBack(res));
   }
+  
+  add(model:leaveFormModel,callBack: (res: ResponseModel<string>)=> void){
+    this._http.post<ResponseModel<string>>("leaveforms",model,res=> callBack(res));
+  }
 }

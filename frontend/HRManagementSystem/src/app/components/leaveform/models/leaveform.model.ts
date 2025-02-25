@@ -8,6 +8,7 @@ export class leaveFormModel{
     status:number;
     reason:string;
     approvalDate:Date;
+    employeeId:string;
     employee: EmployeeModel;
     approvedUser: UserModel;
 }
