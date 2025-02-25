@@ -1,0 +1,87 @@
+<div>
+    <div class="header-container d-flex align-items-center justify-content-between">
+        <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addModal">+ İzin Ekle</button>
+        <h2 class="title mb-0 mx-auto">İzin Formları</h2>
+    </div>    
+    <div class="leave-grid">
+        @for (leaveform of leaveForms; track $index) {
+        <div class="leave-card">
+            <div class="leave-header">
+                <h3>{{ (leaveform.employee.name + " " +leaveform.employee.surname) }}</h3>
+                <span class="status" [ngClass]="status[leaveform.status]">
+                    {{ status[leaveform.status] }}
+                </span>
+            </div>
+            <p><strong>Başlangıç:</strong> {{ leaveform.startDate | date: 'dd/MM/yyyy' }}</p>
+            <p><strong>Bitiş:</strong> {{ leaveform.endDate | date: 'dd/MM/yyyy' }}</p>
+            <p><strong>Toplam Gün:</strong> {{ leaveform.totalDays }}</p>
+            <p><strong>İzin Sebebi:</strong> {{ leaveform.reason }}</p>
+            <hr>
+            @if(leaveform.status == 3){
+            <p><strong>Reddeden:</strong> {{ leaveform.approvedUser.nameSurname }}</p>
+            <p><strong>Red Tarihi:</strong> {{ leaveform.approvalDate | date: 'dd/MM/yyyy' }}</p>
+            } @else if(leaveform.status == 2){
+            <p *ngIf="leaveform.approvedUser"><strong>Onaylayan:</strong> {{ leaveform.approvedUser.nameSurname }}</p>
+            <p *ngIf="leaveform.status"><strong>Onay Tarihi:</strong> {{ leaveform.approvalDate | date: 'dd/MM/yyyy' }}
+            </p>
+            }
+        </div>
+        }
+    </div>
+</div>
+
+<!-- Ekleme Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addModalLabel">İzin Form Ekle</h1>
+                <button type="button" id="addModalCloseBtn" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <form #addForm="ngForm" (ngSubmit)="add(addForm)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="startDate">Başlangıç Tarihi: </label>
+                        <input type="date"
+                         ngModel name="startDate" id="startDate"
+                         class="form-control"
+                         required
+                         #startDate
+                         (ngModelChange)="calculateDays(startDate.value,endDate.value)">
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">Bitiş Tarihi: </label>
+                        <input type="date"
+                         ngModel name="endDate" id="endDate"
+                         class="form-control"
+                         required
+                         #endDate
+                         (ngModelChange)="calculateDays(startDate.value,endDate.value)">
+                    </div>
+                    <div class="form-group">
+                        <label for="totalDays">Toplam Gün: </label>
+                        <input type="number"
+                               [(ngModel)]="totalDays" 
+                               name="totalDays" id="totalDays"
+                               class="form-control"
+                               required
+                               #totalDaysInput>
+                    </div>
+                    <div class="form-group">
+                        <label for="reason">İzin Açıklama: </label>
+                        <input type="text"
+                         ngModel name="reason" id="reason"
+                         class="form-control"
+                         required
+                         #reason>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="close-modal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
