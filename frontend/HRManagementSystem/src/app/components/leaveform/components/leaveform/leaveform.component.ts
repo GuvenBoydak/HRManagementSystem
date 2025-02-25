@@ -31,7 +31,7 @@ export class LeaveformComponent implements OnInit {
 
   getAllLeaveforms() {
     this._leaveform.getLeaveFromsWitEmployeeId(this.userId, res => {
-      this.leaveForms = res.data;
+      this.leaveForms = res.data.sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
     })
   }
   add(form: NgForm) {
