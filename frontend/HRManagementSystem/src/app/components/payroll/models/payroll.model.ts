@@ -1,3 +1,5 @@
+import { EmployeeModel } from "../../employee/models/employee.model";
+
 export class PayrollModel{
     basicSalary: number;
     allowances: number;
@@ -11,4 +13,5 @@ export class PayrollModel{
     grossSalary: number;
     netSalary: number;
     employeeId: string;
+    employee: EmployeeModel;
 }

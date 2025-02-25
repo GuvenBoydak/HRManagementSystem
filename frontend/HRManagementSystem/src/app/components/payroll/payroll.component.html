@@ -3,7 +3,7 @@
     <div class="accordion-item">
       <h2 class="accordion-header">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + $index" aria-expanded="true" [attr.aria-controls]="'#collapse' + $index">
-            {{ (payroll.paymentDate | date: "dd.MMM.yyyy") + ' - ' + (payroll.netSalary | trCurrency: "₺")  }}
+            {{ (payroll.employee.name + ' ' + payroll.employee.surname) +  ' / ' +  (payroll.paymentDate | date: "dd.MMM.yyyy") + ' - ' + (payroll.netSalary | trCurrency: "₺")  }}
         </button>
 
       </h2>
