@@ -19,6 +19,10 @@ export const routes: Routes = [
             {
                 path:"payroll",
                 loadComponent: ()=> import("./components/payroll/payroll.component").then(c=> c.PayrollComponent)    
+            },
+            {
+                path:"leaveform",
+                loadComponent: ()=> import("./components/leaveform/components/leaveform/leaveform.component").then(c=> c.LeaveformComponent)    
             }
         ]
     }

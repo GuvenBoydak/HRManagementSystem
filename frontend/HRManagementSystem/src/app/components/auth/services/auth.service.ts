@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { GenericHttpService } from '../../../common/services/generic-http.service';
-import { LoginModel } from '../components/login/models/login.model';
+import { LoginModel } from '../models/login.model';
 import { ResponseModel } from '../../../common/models/response.model';
-import { TokenModel } from '../components/login/models/token.model';
+import { TokenModel } from '../models/token.model';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({

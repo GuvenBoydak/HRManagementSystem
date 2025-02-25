@@ -1,0 +1,31 @@
+<div>
+    <div class="header-container d-flex align-items-center justify-content-between">
+        <button class="btn btn-outline-primary btn-sm">+ İzin Ekle</button>
+        <h2 class="title mb-0 mx-auto">İzin Formları</h2>
+    </div>    
+    <div class="leave-grid">
+        @for (leaveform of leaveForms; track $index) {
+        <div class="leave-card">
+            <div class="leave-header">
+                <h3>{{ (leaveform.employee.name + " " +leaveform.employee.surname) }}</h3>
+                <span class="status" [ngClass]="status[leaveform.status]">
+                    {{ status[leaveform.status] }}
+                </span>
+            </div>
+            <p><strong>Başlangıç:</strong> {{ leaveform.startDate | date: 'dd/MM/yyyy' }}</p>
+            <p><strong>Bitiş:</strong> {{ leaveform.endDate | date: 'dd/MM/yyyy' }}</p>
+            <p><strong>Toplam Gün:</strong> {{ leaveform.totalDays }}</p>
+            <p><strong>İzin Sebebi:</strong> {{ leaveform.reason }}</p>
+            <hr>
+            @if(leaveform.status == 3){
+            <p><strong>Reddeden:</strong> {{ leaveform.approvedUser.nameSurname }}</p>
+            <p><strong>Red Tarihi:</strong> {{ leaveform.approvalDate | date: 'dd/MM/yyyy' }}</p>
+            } @else if(leaveform.status == 2){
+            <p *ngIf="leaveform.approvedUser"><strong>Onaylayan:</strong> {{ leaveform.approvedUser.nameSurname }}</p>
+            <p *ngIf="leaveform.status"><strong>Onay Tarihi:</strong> {{ leaveform.approvalDate | date: 'dd/MM/yyyy' }}
+            </p>
+            }
+        </div>
+        }
+    </div>
+</div>
