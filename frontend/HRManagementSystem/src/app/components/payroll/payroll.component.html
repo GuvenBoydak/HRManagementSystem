@@ -1,0 +1,48 @@
+<div class="accordion" id="accordionExample">
+    @for(payroll of payrolls;track $index){
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + $index" aria-expanded="true" [attr.aria-controls]="'#collapse' + $index">
+            {{ (payroll.employee.name + ' ' + payroll.employee.surname) +  ' / ' +  (payroll.paymentDate | date: "dd.MMM.yyyy") + ' - ' + (payroll.netSalary | trCurrency: "₺")  }}
+        </button>
+
+      </h2>
+      <div [id]="'collapse' + $index" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Ödeme Tarihi</th>
+                    <th scope="col">Net Maaş</th>
+                    <th scope="col">Brüt Maaş</th>
+                    <th scope="col">Temel Maaş</th>
+                    <th scope="col">Fazla Mesai</th>
+                    <th scope="col">Ek Ödeme</th>
+                    <th scope="col">Kesintiler</th>
+                    <th scope="col">Vergi</th>
+                    <th scope="col">Emeklilik fonu</th>
+                    <th scope="col">Hesap Numarası</th>
+                    <th scope="col">Açıklama</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{(payroll.paymentDate | date: "dd.MMM.yyyy")}}</td>
+                    <td>{{(payroll.netSalary | trCurrency: "₺")}}</td>
+                    <td>{{(payroll.grossSalary | trCurrency: "₺")}}</td>
+                    <td>{{(payroll.basicSalary | trCurrency: "₺")}}</td>
+                    <td>{{(payroll.overtime | trCurrency: "₺")}}</td>
+                    <td>{{(payroll.allowances | trCurrency: "₺")}}</td>
+                    <td>{{(payroll.deductions | trCurrency: "₺")}}</td>
+                    <td>{{(payroll.tax | trCurrency: "₺")}}</td>
+                    <td>{{(payroll.retirementFund | trCurrency: "₺")}}</td>
+                    <td>{{payroll.bankAccountNumber}}</td>
+                    <td>{{payroll.comments}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+      </div>
+    </div>
+}
+  </div>
