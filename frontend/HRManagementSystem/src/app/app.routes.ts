@@ -23,6 +23,10 @@ export const routes: Routes = [
             {
                 path:"leaveform",
                 loadComponent: ()=> import("./components/leaveform/components/leaveform/leaveform.component").then(c=> c.LeaveformComponent)    
+            },
+            {
+                path:"performance",
+                loadComponent: ()=> import("./components/performance/components/performance/performance.component").then(c=> c.PerformanceComponent)    
             }
         ]
     }
