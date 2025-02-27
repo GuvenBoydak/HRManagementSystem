@@ -1,0 +1,3 @@
+namespace HrManagement.Application.Features.Employee.Queries.GetEmployeesBySearchWithPagination;
+
+public record GetEmployeesBySearchWithPaginationQueryRequest(string Search,int PageNumber,int PageSize):IQuery<GetEmployeesBySearchWithPaginationQueryResponse>;

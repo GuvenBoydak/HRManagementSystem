@@ -13,6 +13,7 @@ using HrManagement.Application.Interfaces.Services;
 using HrManagement.Domain.Entities;
 using HrManagement.Domain.Entities.Identity;
 using HrManagement.Domain.Enums;
+using HrManagement.Domain.Shared;
 
 namespace HrManagement.Application.Services;
 
@@ -32,6 +33,20 @@ public class EmployeeService(
             x => x.Payrolls));
 
         return ServiceResult<List<GetAllEmployeeDto>>.Success(employeeResponse);
+    }
+
+    public async Task<ServiceResult<PaginationResponse<List<GetAllEmployeeDto>>>> GetEmployeesBySearchWithPaginationAsync(string search,int pageNumber, int pageSize,CancellationToken cancellationToken)
+    {
+        var result = mapper.Map<List<GetAllEmployeeDto>>( await employeeRepository.GetEmployeesBySearchWithPaginationAsync(search,pageNumber, pageSize));
+        var paginationResponse = new PaginationResponse<List<GetAllEmployeeDto>>
+        {
+            Data = result,
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+            totalCount = await employeeRepository.CountAsync(cancellationToken)
+        };
+
+        return ServiceResult<PaginationResponse<List<GetAllEmployeeDto>>>.Success(paginationResponse);
     }
 
     public async Task<ServiceResult<GetEmployeeByIdDto>> GetByIdAsync(Guid id)
