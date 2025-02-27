@@ -1,5 +1,5 @@
 #### *Projede kullanılan teknoloji ve kütüphaneler*
-- **Angular** **Clean Architecture** / **Ef Core**  / **MsSql** / **CQRS** / **MediatR** / **Fluent Validation** / **AutoMapper**  / **JWT Authentication** / **Generic Repository pattern** / **Result pattern** / **UnitOfWork pattern** / **XUnit Test**
+- **Angular** / **Clean Architecture** / **Ef Core**  / **MsSql** / **CQRS** / **MediatR** / **Fluent Validation** / **AutoMapper**  / **JWT Authentication** / **Generic Repository pattern** / **Result pattern** / **UnitOfWork pattern** / **XUnit Test**
 
 # HRManagementSystem App
 
