@@ -38,11 +38,11 @@ getStars(score: number): number[] {
 
 getPerformanceRating(score: number): string {
   if (score >= 8) {
-    return 'İyi';
-  } else if (score >= 4) {
-    return 'Orta';
+    return 'status-good';
+  } else if (score >= 5) {
+    return 'status-medium';
   } else {
-    return 'Kötü';
+    return 'status-bad';
   }
 }
 

@@ -13,7 +13,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">{{(performance.employee.name + " " + performance.employee.surname)}}</h5>
                         <p class="card-text">{{department[performance.employee.department]}}</p>
-                        <h4 class="badge status-good p-2">{{getPerformanceRating(performance.overallScore)}}</h4>
+                        <h4 class="badge p-2" [ngClass]="getPerformanceRating(performance.overallScore)">{{ performance.overallScore >= 8 ? 'İyi' : performance.overallScore >= 5 ? 'Orta' : 'Kötü' }}</h4>
                         <div class="stars">
                             @for(star of getStars(performance.overallScore); track $index){
                                 <span class="star">&#9733;</span>
