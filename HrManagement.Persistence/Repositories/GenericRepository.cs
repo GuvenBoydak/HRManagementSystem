@@ -73,6 +73,11 @@ public class GenericRepository<T> : IRepository<T> where T : BaseEntity
         return await _entity.FirstOrDefaultAsync(predicate, cancellationToken);
     }
 
+    public async Task<int> CountAsync(CancellationToken cancellationToken)
+    {
+        return await _entity.CountAsync(cancellationToken);
+    }
+
     public async ValueTask AddAsync(T entity, CancellationToken cancellationToken)
     {
         await _entity.AddAsync(entity, cancellationToken);

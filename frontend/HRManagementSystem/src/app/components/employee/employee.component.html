@@ -1,27 +1,68 @@
-<div class="form-group">
-    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-        Ekle
-    </button>
-    <div class="col-md-4" style="float: right; padding: 5px;">
-        <input type="search" [(ngModel)]="search" class="form-control" placeholder="Aranacak Deger Yazınız...">
-    </div>
-    <app-table [heads]='["#","Çalişan Adı Soyad","Departmant","Pozisyon","Email","Telefon","İşe Başlangıç"]'>
-        @for (employee of employees; track $index) {
-        <tr>
-            <td>{{ $index + 1 }}</td>
-            <td>{{ employee.name + employee.surname}}</td>
-            <td>{{ departmentEnum[employee.department] }}</td>
-            <td>{{ employee.position }}</td>
-            <td>{{ employee.email }}</td>
-            <td>{{ employee.phone }}</td>
-            <td>{{ employee.hireDate | date: "dd.MMM.yyyy"}}</td>
-            @if(role == "Admin" || role == "Manager" || role == "HumanResources") {
-                <td>
-                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editModal"
-                        (click)="detailEmployee(employee)">Detay</button>
-                    }
+<div class="container">
+    <div class="header-container d-flex align-items-center justify-content-between">
+
+        @if(role == "HumanResources") {
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+                Ekle
+            </button>
             }
-    </app-table>
+            <h2 class="title mb-0 mx-auto">Çalişanlar</h2>
+            <div class="col-md-4" style="float: right; padding: 5px;">
+                <input type="search" [(ngModel)]="search" class="form-control" placeholder="Aranacak Deger Yazınız..."
+                    (ngModelChange)="getAllWithPaginaion()">
+            </div>
+    </div>
+    <div class="form-group">
+        <app-table [heads]='["#","Adı Soyad","Departmant","Pozisyon","Email","Telefon","İşe Başlangıç"]'>
+            @for (employee of employees.data; track $index) {
+            <tr>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ employee.name + employee.surname}}</td>
+                <td>{{ departmentEnum[employee.department] }}</td>
+                <td>{{ employee.position }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.phone }}</td>
+                <td>{{ employee.hireDate | date: "dd.MMM.yyyy"}}</td>
+                @if(role == "Admin" || role == "Manager" || role == "HumanResources") {
+                <td>
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                        data-bs-target="#editModal" (click)="detailEmployee(employee)">Detay</button>
+                    }
+                    }
+        </app-table>
+        <!--Pagination-->
+        <select name="pageSize" id="pageSize" [(ngModel)]="employees.pageSize" style="width: 65px; float: left;">
+            <option>5</option>
+            <option>10</option>
+            <option>20</option>
+            <option>50</option>
+            <option>100</option>
+            <option>200</option>
+        </select>
+        <nav style="float: right;">
+            <ul class="pagination">
+                <li class="page-item" [ngClass]="employees.isFirstPage ? 'disabled' : ''">
+                    <a class="page-link" (click)="getAllWithPaginaion(1)">İlk</a>
+                </li>
+                <li class="page-item" [ngClass]="employees.isFirstPage ? 'disabled' : ''">
+                    <a class="page-link" (click)="getAllWithPaginaion(employees.pageNumber - 1)">Önceki</a>
+                </li>
+                @for (p of pageNumber; track $index) {
+                <li class="page-item">
+                    <a class="page-link" [ngClass]="employees.pageNumber == p ? 'active' : ''"
+                        (click)="getAllWithPaginaion(p)">{{p}}</a>
+                </li>
+                }
+                <li class="page-item" [ngClass]="employees.isLastPage ? 'disabled' : ''">
+                    <a class="page-link" (click)="getAllWithPaginaion(employees.pageNumber + 1)">Sonraki</a>
+                </li>
+                <li class="page-item" [ngClass]="employees.isLastPage ? 'disabled' : ''">
+                    <a class="page-link" (click)="getAllWithPaginaion(employees.totalCount)">Son</a>
+                </li>
+            </ul>
+        </nav>
+        <!--Pagination-->
+    </div>
 </div>
 
 <!-- Ekleme Modal -->
