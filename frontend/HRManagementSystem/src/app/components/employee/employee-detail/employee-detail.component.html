@@ -1,0 +1,196 @@
+<div class="container mt-4">
+    <div class="row">
+        <!-- Sol Taraf: Çalışan Bilgileri -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Çalışan Bilgileri</h4>
+                    <p><strong>Ad:</strong> {{employee.name}}</p>
+                    <p><strong>Soyad:</strong> {{employee.surname}}</p>
+                    <p><strong>Email:</strong> {{employee.email}}</p>
+                    <p><strong>Telefon:</strong> {{employee.phone}}</p>
+                    <p><strong>Cinsiyet:</strong> {{employee.gender == 1 ? "Erkek" : "Kadın"}}</p>
+                    <p><strong>Doğum Tarihi:</strong> {{employee.dateOfBirth | date: "dd.MMM.yyyy"}}</p>
+                    <p><strong>Adres:</strong> {{employee.address}}</p>
+                    <p><strong>Pozisyon:</strong> {{employee.position}}</p>
+                    <p><strong>Bölüm:</strong> {{department[employee.department]}}</p>
+                    <p><strong>Maaş:</strong> {{employee.salary | trCurrency: "₺"}}</p>
+                    <p><strong>İşe Başlama Tarihi:</strong> {{employee.hireDate | date: "dd.MMM.yyyy"}}</p>
+                    <p><strong>Performans Puanı:</strong> {{employee.performanceScore}}</p>
+                    <p><strong>Kullanılan İzin:</strong> {{employee.leaveUsed + " Gün"}}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Akordeon İçinde Maaş, İzin ve Performans Bilgileri -->
+        <div class="col-md-8">
+            <div class="accordion" id="employeeDetails">
+
+                <!-- Maaş Bilgileri -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="payrollHeading">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#payrollCollapse" aria-expanded="true" aria-controls="payrollCollapse">
+                            Maaş Bilgileri
+                        </button>
+                    </h2>
+                    <div id="payrollCollapse" class="accordion-collapse collapse show" aria-labelledby="payrollHeading"
+                        data-bs-parent="#employeeDetails">
+                        <div class="accordion-body">
+                            <div class="accordion" id="accordionPayroll">
+                                @for (payroll of employee.payrolls; track $index) {
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="payrollHeading{{ $index }}">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse"
+                                            [attr.data-bs-target]="'#payrollCollapse' + $index" aria-expanded="false"
+                                            [attr.aria-controls]="'#payrollCollapse' + $index">
+
+                                            <p><strong>Ad Soyad:</strong> {{" "+ employee.name + " " + employee.surname + " - " }}  <strong>Ödeme Tarihi:</strong> {{ " " + (payroll.paymentDate |
+                                            date: "dd.MMM.yyyy") + " - "}}  <strong>Maaş:</strong> {{ " " + (payroll.netSalary | trCurrency: "₺")}}</p>
+                                        </button>
+                                    </h2>
+                                    <div id="payrollCollapse{{ $index }}" class="accordion-collapse collapse"
+                                        [attr.aria-labelledby]="'#payrollHeading' + $index"
+                                        data-bs-parent="#accordionPayroll">
+                                        <div class="accordion-body">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Ödeme Tarihi</th>
+                                                            <th>Net Maaş</th>
+                                                            <th>Brüt Maaş</th>
+                                                            <th>Temel Maaş</th>
+                                                            <th>Fazla Mesai</th>
+                                                            <th>Ek Ödeme</th>
+                                                            <th>Kesintiler</th>
+                                                            <th>Vergi</th>
+                                                            <th>Emeklilik Fonu</th>
+                                                            <th>Hesap Numarası</th>
+                                                            <th>Açıklama</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>{{ payroll.paymentDate | date: "dd.MMM.yyyy" }}</td>
+                                                            <td>{{ payroll.netSalary | trCurrency: "₺" }}</td>
+                                                            <td>{{ payroll.grossSalary | trCurrency: "₺" }}</td>
+                                                            <td>{{ payroll.basicSalary | trCurrency: "₺" }}</td>
+                                                            <td>{{ payroll.overtime | trCurrency: "₺" }}</td>
+                                                            <td>{{ payroll.allowances | trCurrency: "₺" }}</td>
+                                                            <td>{{ payroll.deductions | trCurrency: "₺" }}</td>
+                                                            <td>{{ payroll.tax | trCurrency: "₺" }}</td>
+                                                            <td>{{ payroll.retirementFund | trCurrency: "₺" }}</td>
+                                                            <td>{{ payroll.bankAccountNumber}}</td>
+                                                            <td>{{ payroll.comments}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- İzin Formları -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="leaveHeading">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#leaveCollapse" aria-expanded="false" aria-controls="leaveCollapse">
+                            İzin Formları
+                        </button>
+                    </h2>
+                    <div id="leaveCollapse" class="accordion-collapse collapse" aria-labelledby="leaveHeading"
+                        data-bs-parent="#employeeDetails">
+                        <div class="accordion-body">
+                            <ul class="list-group">
+                                @for (leaveform of employee.leaveForms; track $index) {
+                                <li class="list-group-item">
+                                    <strong>Başlangıç:</strong> {{ leaveform.startDate | date: "dd.MMM.yyyy" }} -
+                                    <strong>Bitiş:</strong> {{ leaveform.endDate | date: "dd.MMM.yyyy" }}
+                                    <strong>Toplam Gün:</strong> ({{ leaveform.totalDays + " Gün" }}) -
+                                    <span class="badge" [ngClass]="status[leaveform.status]">
+                                        {{ status[leaveform.status] }}
+                                    </span>
+                                </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Performans Değerlendirme Akordeon -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="performanceHeading">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#performanceCollapse" aria-expanded="false"
+                            aria-controls="performanceCollapse">
+                            Performans Değerlendirmesi
+                        </button>
+                    </h2>
+                    <div id="performanceCollapse" class="accordion-collapse collapse"
+                        aria-labelledby="performanceHeading" data-bs-parent="#employeeDetails">
+                        <div class="accordion-body">
+                            <div class="accordion" id="performanceAccordion">
+                                @for (performance of employee.performances; track $index) {
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="heading{{ $index }}">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + $index"
+                                            aria-expanded="false" [attr.aria-controls]="'#collapse' + $index">
+                                            <p><strong>Ad Soyad:</strong> {{" "+ employee.name + " " + employee.surname + " - " }}  <strong>Posizyon:</strong> {{ " " + employee.position}} </p>
+                                        </button>
+                                    </h2>
+                                    <div id="collapse{{ $index }}" class="accordion-collapse collapse"
+                                        [attr.aria-labelledby]="'#heading'+ $index"
+                                        data-bs-parent="#performanceAccordion">
+                                        <div class="accordion-body">
+                                            <div class="card shadow">
+                                                <div class="card-body text-center">
+                                                    <h5 class="card-title">{{ employee.name + " " + employee.surname }}
+                                                    </h5>
+                                                    <p class="card-text">{{ employee.position }}</p>
+                                                    <h4 class="badge p-2" [ngClass]="getPerformanceRating(performance.overallScore)">{{ performance.overallScore >= 8 ? 'İyi' : performance.overallScore >= 5 ? 'Orta' : 'Kötü' }}</h4>
+                                                    <div class="stars">
+                                                        @for(star of getStars(performance.overallScore); track $index){
+                                                        <span class="star">&#9733;</span>
+                                                        }
+                                                    </div>
+                                                    <div class="more-info mt-3">
+                                                        <p><strong>Çalışma Performansı Puanı:</strong> {{
+                                                            performance.workPerformanceScore }}</p>
+                                                        <p><strong>Takım Çalışması Puanı:</strong> {{
+                                                            performance.teamworkScore }}</p>
+                                                        <p><strong>İletişim Puanı:</strong> {{
+                                                            performance.communicationScore }}</p>
+                                                        <p><strong>Liderlik Puanı:</strong> {{
+                                                            performance.leadershipScore }}</p>
+                                                        <p><strong>Genel Performans Puanı:</strong> {{
+                                                            performance.overallScore }}</p>
+                                                        <p><strong>Değerlendirme Başlangıç Tarihi:</strong>
+                                                            {{ performance.reviewStartDate | date: "dd.MMM.yyyy" }}</p>
+                                                        <p><strong>Değerlendirme Bitiş Tarihi:</strong>
+                                                            {{ performance.reviewEndDate | date: "dd.MMM.yyyy" }}</p>
+                                                        <p><strong>Geri Bildirim:</strong> {{ performance.feedBack }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

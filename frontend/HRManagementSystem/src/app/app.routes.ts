@@ -17,6 +17,10 @@ export const routes: Routes = [
                 loadComponent: ()=> import("./components/employee/employee.component").then(c=> c.EmployeeComponent)    
             },
             {
+                path:"employee/detail/:id",
+                loadComponent: ()=> import("./components//employee/employee-detail/employee-detail.component").then(c=> c.EmployeeDetailComponent)    
+            },
+            {
                 path:"payroll",
                 loadComponent: ()=> import("./components/payroll/payroll.component").then(c=> c.PayrollComponent)    
             },
