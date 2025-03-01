@@ -9,4 +9,5 @@ public record UpdatePerformanceCommandRequest(
     int LeadershipScore,
     DateTime ReviewStartDate,
     DateTime ReviewEndDate,
-    Guid ReviewedUserId) : ICommand<UpdatePerformanceCommandResponse>;
+    Guid ReviewedUserId,
+    Guid EmployeeId) : ICommand<UpdatePerformanceCommandResponse>;

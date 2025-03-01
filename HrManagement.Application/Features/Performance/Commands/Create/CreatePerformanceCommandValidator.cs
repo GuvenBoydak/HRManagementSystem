@@ -20,8 +20,6 @@ public class CreatePerformanceCommandValidator:AbstractValidator<CreatePerforman
         RuleFor(p => p.LeadershipScore)
             .InclusiveBetween(1, 10).WithMessage("LeadershipScore score must be between 1 and 10");
         RuleFor(p=> p.ReviewStartDate).NotEmpty().WithMessage("Review start date is required");
-        RuleFor(p=> p.ReviewEndDate).NotEmpty().WithMessage("Review end date is required");
-        RuleFor(p=> p.ReviewedUserId).NotEmpty().WithMessage("Reviewed user id is required");
         RuleFor(p=> p.EmployeeId).NotEmpty().WithMessage("Employee id is required");
     }
 }

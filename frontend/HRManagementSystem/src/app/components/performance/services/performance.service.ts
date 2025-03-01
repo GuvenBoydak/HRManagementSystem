@@ -15,4 +15,8 @@ export class PerformanceService {
   getPerformanceByEmployeeId(id:string,callBack: (res: ResponseModel<PerformanceModel[]>)=> void){
      this._http.get<ResponseModel<PerformanceModel[]>>(`performances/employee/${id}`,res=> callBack(res));
   }
+
+  update(model: PerformanceModel, callBack: (res: ResponseModel<string>) => void) {
+    this._http.put<ResponseModel<string>>(`performances`, model, res => callBack(res));
+  }
 }

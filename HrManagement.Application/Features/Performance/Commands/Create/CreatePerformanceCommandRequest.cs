@@ -7,6 +7,4 @@ public record CreatePerformanceCommandRequest(
     int CommunicationScore,
     int LeadershipScore,
     DateTime ReviewStartDate,
-    DateTime ReviewEndDate,
-    Guid ReviewedUserId,
     Guid EmployeeId) : ICommand<CreatePerformanceCommandResponse>;

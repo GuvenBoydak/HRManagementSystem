@@ -1,0 +1,22 @@
+.Beklemede {
+    background: orange;
+    color: white;
+  }
+  
+  .Onaylandı {
+    background: green;
+    color: white;
+  }
+  
+  .İptalEdildi {
+    background: red;
+    color: white;
+  }
+
+.status-good { background-color: #28a745; color: white; }
+.status-medium { background-color: #ffc107; color: black; }
+.status-bad { background-color: #dc3545; color: white; }
+.stars {
+    color: gold;
+    font-size: 1.5rem;
+}

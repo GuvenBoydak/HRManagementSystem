@@ -2,6 +2,7 @@ import { UserModel } from "../../auth/models/user.model";
 import { EmployeeModel } from "../../employee/models/employee.model";
 
 export class PerformanceModel{
+    id:string;
     feedBack:string;
     workPerformanceScore: number;
     teamworkScore: number;

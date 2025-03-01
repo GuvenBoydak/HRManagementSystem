@@ -19,6 +19,10 @@ export class EmployeeService {
       callBack(res);
     });
   }
+  
+  getById(id:string,callBack:(res: ResponseModel<EmployeeModel>)=> void){
+    this._http.get<ResponseModel<EmployeeModel>>(`employees/${id}`,res=> callBack(res));
+  }
 
   add(model: EmployeeModel, callBack: (res: ResponseModel<string>) => void) {
     this._http.post<ResponseModel<string>>("employees", model, res => callBack(res));
