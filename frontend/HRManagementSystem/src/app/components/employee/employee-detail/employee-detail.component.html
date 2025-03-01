@@ -46,8 +46,11 @@
                                             [attr.data-bs-target]="'#payrollCollapse' + $index" aria-expanded="false"
                                             [attr.aria-controls]="'#payrollCollapse' + $index">
 
-                                            <p><strong>Ad Soyad:</strong> {{" "+ employee.name + " " + employee.surname + " - " }}  <strong>Ödeme Tarihi:</strong> {{ " " + (payroll.paymentDate |
-                                            date: "dd.MMM.yyyy") + " - "}}  <strong>Maaş:</strong> {{ " " + (payroll.netSalary | trCurrency: "₺")}}</p>
+                                            <p><strong>Ad Soyad:</strong> {{" "+ employee.name + " " + employee.surname
+                                                + " - " }} <strong>Ödeme Tarihi:</strong> {{ " " + (payroll.paymentDate
+                                                |
+                                                date: "dd.MMM.yyyy") + " - "}} <strong>Maaş:</strong> {{ " " +
+                                                (payroll.netSalary | trCurrency: "₺")}}</p>
                                         </button>
                                     </h2>
                                     <div id="payrollCollapse{{ $index }}" class="accordion-collapse collapse"
@@ -144,7 +147,8 @@
                                         <button class="accordion-button collapsed" type="button"
                                             data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + $index"
                                             aria-expanded="false" [attr.aria-controls]="'#collapse' + $index">
-                                            <p><strong>Ad Soyad:</strong> {{" "+ employee.name + " " + employee.surname + " - " }}  <strong>Posizyon:</strong> {{ " " + employee.position}} </p>
+                                            <p><strong>Ad Soyad:</strong> {{" "+ employee.name + " " + employee.surname
+                                                + " - " }} <strong>Posizyon:</strong> {{ " " + employee.position}} </p>
                                         </button>
                                     </h2>
                                     <div id="collapse{{ $index }}" class="accordion-collapse collapse"
@@ -156,7 +160,10 @@
                                                     <h5 class="card-title">{{ employee.name + " " + employee.surname }}
                                                     </h5>
                                                     <p class="card-text">{{ employee.position }}</p>
-                                                    <h4 class="badge p-2" [ngClass]="getPerformanceRating(performance.overallScore)">{{ performance.overallScore >= 8 ? 'İyi' : performance.overallScore >= 5 ? 'Orta' : 'Kötü' }}</h4>
+                                                    <h4 class="badge p-2"
+                                                        [ngClass]="getPerformanceRating(performance.overallScore)">{{
+                                                        performance.overallScore >= 8 ? 'İyi' : performance.overallScore
+                                                        >= 5 ? 'Orta' : 'Kötü' }}</h4>
                                                     <div class="stars">
                                                         @for(star of getStars(performance.overallScore); track $index){
                                                         <span class="star">&#9733;</span>
@@ -175,11 +182,16 @@
                                                             performance.overallScore }}</p>
                                                         <p><strong>Değerlendirme Başlangıç Tarihi:</strong>
                                                             {{ performance.reviewStartDate | date: "dd.MMM.yyyy" }}</p>
+                                                        @if (!isDefaultReviewEndDate(performance.reviewEndDate)) {
                                                         <p><strong>Değerlendirme Bitiş Tarihi:</strong>
                                                             {{ performance.reviewEndDate | date: "dd.MMM.yyyy" }}</p>
+                                                        }
                                                         <p><strong>Geri Bildirim:</strong> {{ performance.feedBack }}
                                                         </p>
                                                     </div>
+                                                    @if (isDefaultReviewEndDate(performance.reviewEndDate)) {
+                                                    <button class="btn btn-warning mt-3" (click)="updatePerformance(performance)">Değerlendirmeyi Bitir</button>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>

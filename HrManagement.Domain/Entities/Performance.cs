@@ -11,7 +11,7 @@ public class Performance : BaseEntity
     public int LeadershipScore { get; set; }
     public int OverallScore => (WorkPerformanceScore + TeamworkScore + CommunicationScore + LeadershipScore) / 4;
     public DateTime ReviewStartDate { get; set; }
-    public DateTime ReviewEndDate { get; set; }
+    public DateTime? ReviewEndDate { get; set; }
 
     public Guid? ReviewedUserId { get; set; }
     public AppUser ReviewedUser { get; set; }

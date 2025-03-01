@@ -5,6 +5,9 @@ import { EmployeeModel } from '../models/employee.model';
 import { SharedModule } from '../../../common/shared/shared/shared.module';
 import { Department } from '../models/departmant.enum';
 import { Status } from '../../leaveform/models/status.enum';
+import { PerformanceService } from '../../performance/services/performance.service';
+import { PerformanceModel } from '../../performance/models/performance.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee-detail',
@@ -21,6 +24,8 @@ export class EmployeeDetailComponent {
   constructor(
     private _employee: EmployeeService,
     private _activated: ActivatedRoute,
+    private _performance: PerformanceService,
+    private _toastr: ToastrService
   ) {
     this._activated.params.subscribe(params => {
       this.getEmployeeDetails(params["id"]);
@@ -47,5 +52,20 @@ export class EmployeeDetailComponent {
       return 'status-bad';
     }
   }
+
+  isDefaultReviewEndDate(date: Date | string | null | undefined): boolean {
+    if (!date) return true; 
   
+    const parsedDate = new Date(date); 
+    return parsedDate.getFullYear() === 1;
+  }
+
+  updatePerformance(model: PerformanceModel){
+    model.reviewEndDate = new Date();
+    model.reviewedUserId = localStorage.getItem("userId");
+    
+    this._performance.update(model,res=> {
+      this._toastr.success("Degerlendirme bitirildi.");
+    })
+  } 
 }
