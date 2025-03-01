@@ -21,16 +21,17 @@
                 </div>
             </div>
         </div>
-
         <!-- Akordeon İçinde Maaş, İzin ve Performans Bilgileri -->
         <div class="col-md-8">
-            <div class="accordion" id="employeeDetails">
+            <div class="row mx-1 mb-1"> <button class="btn btn-outline-primary " style="float: right;" data-bs-toggle="modal"
+                data-bs-target="#payrollModal"> Yene maaş ekle</button></div>
 
+            <div class="accordion" id="employeeDetails">
                 <!-- Maaş Bilgileri -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="payrollHeading">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#payrollCollapse" aria-expanded="true" aria-controls="payrollCollapse">
+                            data-bs-target="#payrollCollapse" aria-expanded="false" aria-controls="payrollCollapse">
                             Maaş Bilgileri
                         </button>
                     </h2>
@@ -121,8 +122,11 @@
                                         {{ status[leaveform.status] }}
                                     </span>
                                     @if(status[leaveform.status] == 'Beklemede') {
-                                    <button class="btn btn-outline-success mx-2" type="button" (click)="approveLeaveForm(leaveform.id)">Onayla</button>
-                                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#rejectModal" (click)="rejectedIdBind(leaveform.id)">Reddet</button>
+                                    <button class="btn btn-outline-success mx-2" type="button"
+                                        (click)="approveLeaveForm(leaveform.id)">Onayla</button>
+                                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#rejectModal"
+                                        (click)="rejectedIdBind(leaveform.id)">Reddet</button>
                                     }
                                 </li>
                                 }
@@ -130,7 +134,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 <!-- Performans Değerlendirme Akordeon -->
                 <div class="accordion-item">
@@ -194,7 +197,9 @@
                                                         </p>
                                                     </div>
                                                     @if (isDefaultReviewEndDate(performance.reviewEndDate)) {
-                                                    <button class="btn btn-warning mt-3" (click)="updatePerformance(performance)">Değerlendirmeyi Bitir</button>
+                                                    <button class="btn btn-warning mt-3"
+                                                        (click)="updatePerformance(performance)">Değerlendirmeyi
+                                                        Bitir</button>
                                                     }
                                                 </div>
                                             </div>
@@ -225,8 +230,70 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">Red Sebebi: </label>
-                        <input type="text" class="form-control" ngModel name="reason" id="reason" class="form-control" #reason
-                        [appValid]="reason.validity.valid" required minlength="3">
+                        <input type="text" class="form-control" ngModel name="reason" id="reason" class="form-control"
+                            #reason [appValid]="reason.validity.valid" required minlength="3">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="close-modal" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-primary">Gönder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Maaş ekleme Modal -->
+<div class="modal fade" id="payrollModal" tabindex="-1" aria-labelledby="payrollModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="payrollModalLabel">Maaş Ekle</h1>
+                <button type="button" id="payrollModalCloseBtn" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <form #payrollForm="ngForm" (ngSubmit)="addPayroll(payrollForm)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="basicSalary">Temel Maaş: </label>
+                        <input type="number" class="form-control" ngModel name="basicSalary" id="basicSalary" class="form-control"
+                            #basicSalary [appValid]="basicSalary.validity.valid" required >
+                    </div>
+                    <div class="form-group">
+                        <label for="allowances">Ek Ödeme: </label>
+                        <input type="number" class="form-control" ngModel name="allowances" id="allowances" class="form-control"
+                            #allowances [appValid]="allowances.validity.valid" required >
+                    </div>
+                    <div class="form-group">
+                        <label for="overtime">Fazla Mesai: </label>
+                        <input type="number" class="form-control" ngModel name="overtime" id="overtime" class="form-control"
+                            #overtime [appValid]="overtime.validity.valid" required >
+                    </div>
+                    <div class="form-group">
+                        <label for="deductions">Kesintiler: </label>
+                        <input type="number" class="form-control" ngModel name="deductions" id="deductions" class="form-control"
+                            #deductions [appValid]="deductions.validity.valid" required >
+                    </div>
+                    <div class="form-group">
+                        <label for="tax">Vergi: </label>
+                        <input type="number" class="form-control" ngModel name="tax" id="tax" class="form-control"
+                            #tax [appValid]="tax.validity.valid" required >
+                    </div>
+                    <div class="form-group">
+                        <label for="retirementFund">Emeklilik Fonu: </label>
+                        <input type="number" class="form-control" ngModel name="retirementFund" id="retirementFund" class="form-control"
+                            #retirementFund [appValid]="retirementFund.validity.valid" required >
+                    </div>
+                    <div class="form-group">
+                        <label for="bankAccountNumber">Hesap Numarası: </label>
+                        <input type="text" class="form-control" ngModel name="bankAccountNumber" id="bankAccountNumber" class="form-control"
+                            #bankAccountNumber [appValid]="bankAccountNumber.validity.valid" required >
+                    </div>
+                    <div class="form-group">
+                        <label for="comments">Açıklama: </label>
+                        <input type="text" class="form-control" ngModel name="comments" id="comments" class="form-control"
+                            #comments>
                     </div>
                 </div>
                 <div class="modal-footer">
