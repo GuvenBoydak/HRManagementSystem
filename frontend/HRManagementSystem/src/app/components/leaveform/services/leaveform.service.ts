@@ -19,4 +19,11 @@ export class LeaveformService {
   add(model:leaveFormModel,callBack: (res: ResponseModel<string>)=> void){
     this._http.post<ResponseModel<string>>("leaveforms",model,res=> callBack(res));
   }
+
+  approveLeaveForm(model:any,callBack: (res: ResponseModel<string>)=> void){
+    this._http.put<ResponseModel<string>>("leaveforms/approve",model,res=> callBack(res));
+  }
+  rejectLeaveForm(model:any,callBack: (res: ResponseModel<string>)=> void){
+    this._http.put<ResponseModel<string>>("leaveforms/reject",model,res=> callBack(res));
+  }
 }

@@ -120,6 +120,10 @@
                                     <span class="badge" [ngClass]="status[leaveform.status]">
                                         {{ status[leaveform.status] }}
                                     </span>
+                                    @if(status[leaveform.status] == 'Beklemede') {
+                                    <button class="btn btn-outline-success mx-2" type="button" (click)="approveLeaveForm(leaveform.id)">Onayla</button>
+                                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#rejectModal" (click)="rejectedIdBind(leaveform.id)">Reddet</button>
+                                    }
                                 </li>
                                 }
                             </ul>
@@ -203,6 +207,34 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Red Sebeb ekleme Modal -->
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="rejectModalLabel">Çalişan Ekle</h1>
+                <button type="button" id="rejectModalCloseBtn" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <form #rejecedForm="ngForm" (ngSubmit)="rejectLeaveForm(rejecedForm)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Red Sebebi: </label>
+                        <input type="text" class="form-control" ngModel name="reason" id="reason" class="form-control" #reason
+                        [appValid]="reason.validity.valid" required minlength="3">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="close-modal" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-primary">Gönder</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

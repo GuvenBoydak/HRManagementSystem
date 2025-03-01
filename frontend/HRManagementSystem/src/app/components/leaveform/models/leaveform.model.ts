@@ -2,6 +2,7 @@ import { UserModel } from "../../auth/models/user.model";
 import { EmployeeModel } from "../../employee/models/employee.model";
 
 export class leaveFormModel{
+    id:string;
     startDate:Date;
     endDate:Date;
     totalDays:number;
