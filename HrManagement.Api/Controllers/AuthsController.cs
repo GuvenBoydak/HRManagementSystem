@@ -1,3 +1,4 @@
+using HrManagement.Application.Features.AppUser.Commands.ChangePassword;
 using HrManagement.Application.Features.AppUser.Commands.Login;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -13,4 +14,10 @@ public class AuthsController(IMediator mediator):BaseController
         return CreateActionResult(response.Result);
     }
     
+    [HttpPost("change-password")]
+    public async Task<IActionResult> Login(ChangePasswordCommandRequest request)
+    {
+        var response = await mediator.Send(request);
+        return CreateActionResult(response.Result);
+    }
 }

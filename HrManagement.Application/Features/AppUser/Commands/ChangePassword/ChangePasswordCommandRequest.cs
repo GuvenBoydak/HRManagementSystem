@@ -1,0 +1,3 @@
+namespace HrManagement.Application.Features.AppUser.Commands.ChangePassword;
+
+public record ChangePasswordCommandRequest(Guid UserId,string CurrentPassword,string NewPassword,string ConfirmPassword):ICommand<ChangePasswordCommandResponse>;

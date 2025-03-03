@@ -1,6 +1,7 @@
 using System.Net;
 using HrManagement.Application;
 using HrManagement.Application.Constant;
+using HrManagement.Application.Features.AppUser.Commands.ChangePassword;
 using HrManagement.Application.Features.AppUser.Commands.Login;
 using HrManagement.Application.Interfaces.Services;
 using HrManagement.Domain.Entities.Identity;
@@ -55,6 +56,28 @@ public class AuthService(UserManager<AppUser> userManager,IJwtProviderService jw
             return ServiceResult.Failure(string.Join(", ", result.Errors.Select(e => e.Description)));
         }
     
+
+        return ServiceResult.Success(HttpStatusCode.NoContent);
+    }
+
+    public async Task<ServiceResult> ChangePasswordAsync(ChangePasswordCommandRequest request)
+    {
+        if (!request.NewPassword.Equals(request.ConfirmPassword))
+        {
+            return ServiceResult.Failure(UserConstant.PasswordNotMatch,HttpStatusCode.BadRequest);
+        }
+        
+        var user = await userManager.FindByIdAsync(request.UserId.ToString());
+        if (user is null)
+        {
+            return ServiceResult.Failure(UserConstant.NotFound,HttpStatusCode.BadRequest);
+        }
+        
+        var checkPassword = await userManager.ChangePasswordAsync(user, request.CurrentPassword,request.NewPassword);
+        if (!checkPassword.Succeeded)
+        {
+            return ServiceResult.Failure(string.Join(", ", checkPassword.Errors.Select(e => e.Description)));
+        }
 
         return ServiceResult.Success(HttpStatusCode.NoContent);
     }

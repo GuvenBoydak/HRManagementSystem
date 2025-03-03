@@ -4,6 +4,7 @@ import { LoginModel } from '../models/login.model';
 import { ResponseModel } from '../../../common/models/response.model';
 import { TokenModel } from '../models/token.model';
 import { jwtDecode } from 'jwt-decode';
+import { ChangePasswordRequestModel } from '../models/change-password-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,13 @@ export class AuthService {
       localStorage.setItem('userId', this.getUserId());
       callBack(res)
     });
+  }
+
+  changePassword(model: ChangePasswordRequestModel, callBack: (res: ResponseModel<string>) => void) {
+    this._http.post<ResponseModel<string>>("auths/change-password", model, res=>{
+      callBack(res);
+    });
+
   }
 
   getUserRole(): string | null {

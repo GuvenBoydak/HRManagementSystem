@@ -26,7 +26,7 @@ public class PerformancesController(IMediator mediator) : BaseController
         var response = await mediator.Send(new GetPerformanceByIdQueryRequest(id));
         return CreateActionResult(response.Result);
     }
-    //[Authorize(Roles = "HumanResource")]
+    [Authorize(Roles = "HumanResource")]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreatePerformanceCommandRequest request)
     {
