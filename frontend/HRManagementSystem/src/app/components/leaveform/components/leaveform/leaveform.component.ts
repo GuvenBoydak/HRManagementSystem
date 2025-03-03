@@ -5,6 +5,7 @@ import { leaveFormModel } from '../../models/leaveform.model';
 import { Status } from '../../models/status.enum';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { CreateLeaveFormRequestModel } from '../../models/create-leaveform-request.model';
 
 @Component({
   selector: 'app-leaveform',
@@ -36,11 +37,15 @@ export class LeaveformComponent implements OnInit {
   }
   add(form: NgForm) {
     if (form.valid) {
-      let leaveform = new leaveFormModel();
-      leaveform = form.value;
-      leaveform.employeeId = this.userId;
+      let model: CreateLeaveFormRequestModel = {
+        employeeId: this.userId,
+        startDate: form.value.startDate,
+        endDate: form.value.endDate,
+        totalDays: this.totalDays,
+        reason: form.value.reason
+      };
 
-      this._leaveform.add(leaveform, res => {
+      this._leaveform.add(model, res => {
         this._toastr.success("İzin Formu Eklendi");
         this.getAllLeaveforms();
         let modal = document.getElementById('close-modal') as HTMLElement;
