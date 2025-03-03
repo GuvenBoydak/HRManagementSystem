@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedModule } from '../../common/shared/shared/shared.module';
 import { TableComponent } from '../../common/components/table/table.component';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { EmployeeModel } from './models/employee.model';
 import { EmployeeService } from './services/employee.service';
 import { Department } from './models/departmant.enum';
@@ -65,8 +65,6 @@ export class EmployeeComponent implements OnInit {
   }
     
 
-  detailEmployee(employee: EmployeeModel) {
-  }
 
   add(form: NgForm) {
     let model: EmployeeModel = {

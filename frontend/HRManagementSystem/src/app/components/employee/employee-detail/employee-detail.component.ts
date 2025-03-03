@@ -130,6 +130,27 @@ export class EmployeeDetailComponent {
       })
     }
   }
+
+  addPerformance(form:NgForm){
+    if(form.valid){
+      let model = {
+        employeeId: this.employeeId,
+        workPerformanceScore: form.value.workPerformanceScore,
+        teamworkScore: form.value.teamworkScore,
+        communicationScore: form.value.communicationScore,
+        leadershipScore: form.value.leadershipScore,
+        feedBack: form.value.feedBack,
+        reviewStartDate: new Date()
+      }
+
+      this._performance.add(model,res=>{
+        this._toastr.success("Performans bilgisi eklendi.");
+        this.getEmployeeDetails(this.employeeId);
+        this.closeModal();
+      })
+    }
+
+  }
   
   closeModal(){
     let modal = document.getElementById('close-modal') as HTMLElement;

@@ -6,6 +6,7 @@ using HrManagement.Domain.Enums;
 namespace HrManagement.Application.Features.Employee.Queries.GetAllEmployee;
 
 public record GetAllEmployeeDto(
+    Guid Id,
     string Name,
     string Surname,
     string Email,

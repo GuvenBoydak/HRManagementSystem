@@ -24,7 +24,7 @@
         <!-- Akordeon İçinde Maaş, İzin ve Performans Bilgileri -->
         <div class="col-md-8">
             <div class="row mx-1 mb-1"> <button class="btn btn-outline-primary " style="float: right;" data-bs-toggle="modal"
-                data-bs-target="#payrollModal"> Yene maaş ekle</button></div>
+                data-bs-target="#payrollModal"> Yeni maaş ekle</button></div>
 
             <div class="accordion" id="employeeDetails">
                 <!-- Maaş Bilgileri -->
@@ -118,6 +118,7 @@
                                     <strong>Başlangıç:</strong> {{ leaveform.startDate | date: "dd.MMM.yyyy" }} -
                                     <strong>Bitiş:</strong> {{ leaveform.endDate | date: "dd.MMM.yyyy" }}
                                     <strong>Toplam Gün:</strong> ({{ leaveform.totalDays + " Gün" }}) -
+                                    <strong>Sebebi:</strong> {{ leaveform.reason}} -
                                     <span class="badge" [ngClass]="status[leaveform.status]">
                                         {{ status[leaveform.status] }}
                                     </span>
@@ -155,7 +156,7 @@
                                             data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + $index"
                                             aria-expanded="false" [attr.aria-controls]="'#collapse' + $index">
                                             <p><strong>Ad Soyad:</strong> {{" "+ employee.name + " " + employee.surname
-                                                + " - " }} <strong>Posizyon:</strong> {{ " " + employee.position}} </p>
+                                                + "  -  " }} <strong>Posizyon:</strong> {{ " " + employee.position + "  -  "}}  <strong>Degerlendirme Başalangıç:</strong> {{ " " + performance.reviewStartDate | date: "dd.MMM.yyyy"}}</p>
                                         </button>
                                     </h2>
                                     <div id="collapse{{ $index }}" class="accordion-collapse collapse"
@@ -211,6 +212,8 @@
                         </div>
                     </div>
                 </div>
+                <div class="row mx-1 mt-1"> <button class="btn btn-outline-primary " style="float: right;" data-bs-toggle="modal"
+                    data-bs-target="#performanceModal"> Yeni Performans ekle</button></div>
             </div>
         </div>
     </div>
@@ -294,6 +297,53 @@
                         <label for="comments">Açıklama: </label>
                         <input type="text" class="form-control" ngModel name="comments" id="comments" class="form-control"
                             #comments>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="close-modal" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-primary">Gönder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Performans ekleme Modal -->
+<div class="modal fade" id="performanceModal" tabindex="-1" aria-labelledby="performanceModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="performanceModalLabel">Performans Ekle</h1>
+                <button type="button" id="performanceModalCloseBtn" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <form #performanceform="ngForm" (ngSubmit)="addPerformance(performanceform)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="workPerformanceScore">İş Performansı Puanı: </label>
+                        <input type="number" class="form-control" ngModel name="workPerformanceScore" id="workPerformanceScore" class="form-control"
+                            #workPerformanceScore [appValid]="workPerformanceScore.validity.valid" required max="10">
+                    </div>
+                    <div class="form-group">
+                        <label for="communicationScore">İletişim Puanı: </label>
+                        <input type="number" class="form-control" ngModel name="communicationScore" id="communicationScore" class="form-control"
+                            #communicationScore [appValid]="communicationScore.validity.valid" required max="10">
+                    </div>
+                    <div class="form-group">
+                        <label for="leadershipScore">Liderlik Mesai: </label>
+                        <input type="number" class="form-control" ngModel name="leadershipScore" id="leadershipScore" class="form-control"
+                            #leadershipScore [appValid]="leadershipScore.validity.valid" required max="10">
+                    </div>
+                    <div class="form-group">
+                        <label for="teamworkScore">Takım Çalişması Puanı: </label>
+                        <input type="number" class="form-control" ngModel name="teamworkScore" id="teamworkScore" class="form-control"
+                            #teamworkScore [appValid]="teamworkScore.validity.valid" required max="10">
+                    </div>
+                    <div class="form-group">
+                        <label for="feedBack">Geri Bildirim: </label>
+                        <input type="text" class="form-control" ngModel name="feedBack" id="feedBack" class="form-control"
+                            #feedBack  >
                     </div>
                 </div>
                 <div class="modal-footer">
