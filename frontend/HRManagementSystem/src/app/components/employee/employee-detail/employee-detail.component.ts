@@ -146,12 +146,15 @@ export class EmployeeDetailComponent {
       this._performance.add(model,res=>{
         this._toastr.success("Performans bilgisi eklendi.");
         this.getEmployeeDetails(this.employeeId);
-        this.closeModal();
+        
+        let modal = document.getElementById('close-2-modal') as HTMLElement;
+        if (modal) {
+          modal.click();
+        }
       })
     }
-
   }
-  
+
   closeModal(){
     let modal = document.getElementById('close-modal') as HTMLElement;
       if (modal) {

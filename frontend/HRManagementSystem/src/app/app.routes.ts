@@ -13,7 +13,7 @@ export const routes: Routes = [
         loadComponent: () => import("./components/layouts/layout/layout.component").then(c => c.LayoutComponent),
         children: [
             {
-                path:"employee",
+                path:"",
                 loadComponent: ()=> import("./components/employee/employee.component").then(c=> c.EmployeeComponent)    
             },
             {
