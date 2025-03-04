@@ -28,7 +28,6 @@ export class AuthService {
     this._http.post<ResponseModel<string>>("auths/change-password", model, res=>{
       callBack(res);
     });
-
   }
 
   getUserRole(): string | null {

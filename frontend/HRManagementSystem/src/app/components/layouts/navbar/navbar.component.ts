@@ -8,5 +8,8 @@ import { SharedModule } from '../../../common/shared/shared/shared.module';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-
+userId: string;
+constructor() {
+  this.userId = localStorage.getItem('userId');
+}
 }

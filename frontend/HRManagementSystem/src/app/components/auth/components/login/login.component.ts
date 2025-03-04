@@ -28,7 +28,7 @@ export class LoginComponent {
     loginModel.password = password;
 
     this._auth.login(loginModel, res => {
-      this.router.navigate(['/employee']);
+      this.router.navigate(['/']);
     });
   }
 }
