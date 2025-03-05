@@ -17,19 +17,18 @@
             @for (employee of employees.data; track $index) {
             <tr>
                 <td>{{ $index + 1 }}</td>
-                <td>{{ employee.name + employee.surname}}</td>
+                <td>{{ employee.name + " " + employee.surname}}</td>
                 <td>{{ departmentEnum[employee.department] }}</td>
                 <td>{{ employee.position }}</td>
                 <td>{{ employee.email }}</td>
                 <td>{{ employee.phone }}</td>
                 <td>{{ employee.hireDate | date: "dd.MMM.yyyy"}}</td>
-                @if(role == "Admin" || "Manager" || "HumanResources") {
+                @if(role != "Employee") {
                     <td>
                         <button [routerLink]="['/employee/detail', employee.id]" class="btn btn-outline-primary">
                           Detay
                         </button>
-                      </td>
-                      
+                      </td>   
                 }
                 }
         </app-table>
