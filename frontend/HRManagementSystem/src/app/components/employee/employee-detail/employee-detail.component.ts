@@ -20,6 +20,7 @@ import { PayrollService } from '../../payroll/services/payroll.service';
   styleUrl: './employee-detail.component.css'
 })
 export class EmployeeDetailComponent {
+  userId: string = "";
   employeeId: string = "";
   employee: EmployeeModel = new EmployeeModel();
   department = Department;
@@ -38,6 +39,7 @@ export class EmployeeDetailComponent {
       this.employeeId = params["id"];
       this.getEmployeeDetails(this.employeeId);
     })
+    this.userId = localStorage.getItem("userId");
   }
 
   getEmployeeDetails(id: string) {

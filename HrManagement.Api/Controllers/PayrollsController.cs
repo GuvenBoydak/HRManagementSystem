@@ -1,3 +1,4 @@
+using HrManagement.Application.Constant;
 using HrManagement.Application.Features.Payroll.Commands.Create;
 using HrManagement.Application.Features.Payroll.Commands.Update;
 using HrManagement.Application.Features.Payroll.Queries.GetPayrollById;
@@ -23,14 +24,14 @@ public class PayrollsController(IMediator mediator):BaseController
         var response = await mediator.Send(new GetPayrollByIdQueryRequest(id));
         return CreateActionResult(response.Result);
     }
-    [Authorize(Roles = "HumanResource")]
+    [Authorize(Roles = EmployeeConstant.HumanResources)]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreatePayrollCommandRequest request)
     {
         var response = await mediator.Send(request);
         return CreateActionResult(response.Result);
     }
-    [Authorize(Roles = "HumanResource")]
+    [Authorize(Roles = EmployeeConstant.HumanResources)]
     [HttpPut]
     public async Task<IActionResult> Update([FromBody] UpdatePayrollCommandRequest request)
     {
